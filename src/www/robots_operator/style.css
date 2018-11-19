@@ -1,0 +1,122 @@
+.border {
+    border: 1px solid rgb(0, 200, 0); /* Параметры рамки */
+    border-radius: 5px;
+    margin: 5px 1% 5px 1%;
+}
+
+.row {
+    display: table;
+    height: 100%;
+    width: 98%;
+}
+
+#name_pannel {
+    width: 98%;
+    margin: 5px 1% 5px 1%;
+    text-align: center;
+}
+
+#robot_name {
+    position: relative;
+    width: 30%;
+    margin: 5px 5px 5px 5px;
+    vertical-align: middle;
+    border: none;
+}
+
+#robot_selector {
+    position: relative;
+    width: 15%;
+    margin: 5px 5px 5px 5px;
+    vertical-align: middle;
+}
+
+#responce_pannel {
+
+}
+
+#log_pannel {
+    /*display: table;*/
+    width: 98%;
+    height: 300px;
+    margin: 5px 1% 5px 1%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.robot_text_color {
+    color: #1022ff;
+    position: relative;
+    margin: 3px 3px 3px 3px;
+    display: block;
+    float: left;
+    clear: left;
+}
+
+.bot_text_color {
+    color: #c96807;
+    position: relative;
+    margin: 3px 3px 3px 3px;
+    display: block;
+    float: left;
+    clear: left;
+}
+
+.operator_text_color {
+    color: #4e8900;
+    position: relative;
+    margin: 3px 3px 3px 3px;
+    display: block;
+    float: left;
+    clear: left;
+}
+
+#input_text {
+    margin: 15px 5px 15px 15px;
+    vertical-align: middle;
+}
+
+#robot_responce {
+    position: relative;
+    display: inline-block;
+    outline: none;
+    border: none;
+    width: 76%;
+    vertical-align: middle;
+    margin: 5px 5px 5px 5px;
+    padding: 3px 3px 3px 3px;
+    border: 1px solid rgb(0, 200, 0); /* Параметры рамки */
+    border-radius: 5px;
+}
+
+#send_text_btn {
+    position: relative;
+    display: inline-block;
+    margin: 5px 5px 5px 5px;
+    border: 1px solid rgb(0, 200, 0); /* Параметры рамки */
+    border-radius: 5px;
+    vertical-align: middle;
+    right: 5px;
+}
+
+#send_img {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    content: url('Send.png');
+    margin: 1px 1px 1px 1px;
+    vertical-align: middle;
+}
+
+#help {
+    position: absolute;
+    content: attr(data-title);
+    z-index: 1;
+    background: rgba(255,255,230,0.85);
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    padding: 5px 5px 5px 5px;
+    margin: 15px 15px 15px 15px;
+    border: 1px solid rgb(0, 255, 0);
+    border-radius: 5px;
+}

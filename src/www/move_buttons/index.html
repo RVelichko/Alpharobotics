@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+		<title>Command Editor</title>
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+		<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+		<div id="arrowButtonHolder" class="col-xs-3">
+			<div class="panel panel-default">
+				<div style="padding: 5px;" class="panel-body">
+					<div class="row text-center">
+						<button id="leftUp" ng-mousedown="commandButtonMouseDown(&quot;leftUp&quot;)" ng-mouseup="commandButtonMouseUp(&quot;leftUp&quot;)" class="btn btn-info btn-xs">
+							<span class="glyphicon">↖</span>
+						</button>
+						<button id="up" ng-mousedown="commandButtonMouseDown(&quot;up&quot;)" ng-mouseup="commandButtonMouseUp(&quot;up&quot;)" class="btn btn-primary btn-xs">
+							<span class="glyphicon glyphicon-arrow-up"></span>
+						</button>
+						<button id="rightUp" ng-mousedown="commandButtonMouseDown(&quot;rightUp&quot;)" ng-mouseup="commandButtonMouseUp(&quot;rightUp&quot;)" class="btn btn-info btn-xs">
+							<span class="glyphicon">↗</span>
+						</button>
+					</div>
+					<div class="row text-center">
+						<button id="left" style="margin: 5px 10px" ng-mousedown="commandButtonMouseDown(&quot;left&quot;)" ng-mouseup="commandButtonMouseUp(&quot;left&quot;)" class="btn btn-primary btn-xs">
+							<span class="glyphicon glyphicon-arrow-left"></span>
+						</button>
+						<button id="right" style="margin: 5px 10px" ng-mousedown="commandButtonMouseDown(&quot;right&quot;)" ng-mouseup="commandButtonMouseUp(&quot;right&quot;)" class="btn btn-primary btn-xs">
+							<span class="glyphicon glyphicon-arrow-right"></span>
+						</button>
+					</div>
+					<div class="row text-center">
+						<button id="leftDown" ng-mousedown="commandButtonMouseDown(&quot;leftDown&quot;)" ng-mouseup="commandButtonMouseUp(&quot;leftDown&quot;)" class="btn btn-info btn-xs">
+							<span class="glyphicon">↙</span>
+						</button>
+						<button id="down" ng-mousedown="commandButtonMouseDown(&quot;down&quot;)" ng-mouseup="commandButtonMouseUp(&quot;down&quot;)" class="btn btn-primary btn-xs">
+							<span class="glyphicon glyphicon-arrow-down"></span>
+						</button>
+						<button id="rightDown" ng-mousedown="commandButtonMouseDown(&quot;rightDown&quot;)" ng-mouseup="commandButtonMouseUp(&quot;rightDown&quot;)" class="btn btn-info btn-xs">
+							<span class="glyphicon">↘</span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			function sendCmd(str) {
+				console.log('send: ' + str);
+			}
+
+			var keys = [0, 0, 0, 0];
+			var old_keys = keys;
+
+			document.onkeydown = function(e) {
+				old_keys = keys;
+				e = e || window.event;
+				var kc = e.keyCode;
+				if (kc === 37) {
+					keys[0] = 1;
+				}
+				if (kc === 38) {
+					keys[1] = 1;
+				}
+				if (kc === 39) {
+					keys[2] = 1;
+				}
+				if (kc === 40) {
+					keys[3] = 1;
+				}
+				executeCommand();
+			};
+
+			document.onkeyup = function(e) {
+				old_keys= keys;
+				e = e || window.event;
+				var kc = e.keyCode;
+				if (kc === 37) {
+					keys[0] = 0;
+				}
+				if (kc === 38) {
+					keys[1] = 0;
+				}
+				if (kc === 39) {
+					keys[2] = 0;
+				}
+				if (kc === 40) {
+					keys[3] = 0;
+				}
+				executeCommand();
+			};
+
+			function executeCommand() {
+				if (keys[0] === 1 && keys[1] !== 1 && keys[3] !== 1) {
+					sendCmd('left');
+				}
+				if (keys[1] === 1 && keys[0] !== 1 && keys[2] !== 1) {
+					sendCmd('up');
+				}
+				if (keys[2] === 1 && keys[1] !== 1 && keys[3] !== 1) {
+					sendCmd('right');
+				}
+				if (keys[3] === 1 && keys[0] !== 1 && keys[2] !== 1) {
+					sendCmd('down');
+				}
+
+				if (keys[0] === 1 && keys[1] === 1) {
+					sendCmd('leftUp');
+				}
+				if (keys[0] === 1 && keys[3] === 1) {
+					sendCmd('leftDown');
+				}
+
+				if (keys[2] === 1 && keys[1] === 1) {
+					sendCmd('rightUp');
+				}
+				if (keys[2] === 1 && keys[3] === 1) {
+					sendCmd('rightDown');
+				}
+
+				console.log(JSON.stringify(keys));
+			}
+
+
+			var interval;
+			var sleep = 100;
+			document.getElementById("leftUp").onmousedown = function() {
+				interval = setInterval(function() {
+					sendCmd("leftUp");
+				}, sleep);
+			};
+
+			document.getElementById("up").onmousedown = function() {
+				interval = setInterval(function() {
+					sendCmd("up");
+				}, sleep);
+			};
+
+			document.getElementById("rightUp").onmousedown = function() {
+				interval = setInterval(function() {
+					sendCmd("rightUp");
+				}, sleep);
+			};
+
+			document.getElementById("left").onmousedown = function() {
+				interval = setInterval(function() {
+					sendCmd("left");
+				}, sleep);
+			};
+
+			document.getElementById("right").onmousedown = function() {
+				interval = setInterval(function() {
+					sendCmd("right");
+				}, sleep);
+			};
+
+			document.getElementById("leftDown").onmousedown = function() {
+				interval = setInterval(function() {
+					sendCmd("leftDown");
+				}, sleep);
+			};
+
+			document.getElementById("down").onmousedown = function() {
+				interval = setInterval(function() {
+					sendCmd("down");
+				}, sleep);
+			};
+
+			document.getElementById("rightDown").onmousedown = function() {
+				interval = setInterval(function() {
+					sendCmd("rightDown");
+				}, sleep);
+			};
+
+			document.getElementById("up").onmouseup = function() {
+				clearInterval(interval);
+			};
+			document.getElementById("rightUp").onmouseup = function() {
+				clearInterval(interval);
+			};
+			document.getElementById("left").onmouseup = function() {
+				clearInterval(interval);
+			};
+			document.getElementById("right").onmouseup = function() {
+				clearInterval(interval);
+			};
+			document.getElementById("leftDown").onmouseup = function() {
+				clearInterval(interval);
+			};
+			document.getElementById("down").onmouseup = function() {
+				clearInterval(interval);
+			};
+			document.getElementById("leftUp").onmouseup = function() {
+				clearInterval(interval);
+			};
+			document.getElementById("rightDown").onmouseup = function() {
+				clearInterval(interval);
+			};
+		</script>
+	</body>
+</html>

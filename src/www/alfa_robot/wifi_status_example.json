@@ -1,0 +1,45 @@
+[
+  {
+    "ifname":"wlan0",
+    "disabled":false,
+    "encryption":"WPA2 PSK (CCMP)",
+    "bssid":"00:27:22:70:F6:2E",
+    "mode":"Client",
+    "quality":82,
+    "noise":-95,
+    "ssid":"ARnetWiFi5GHz",
+    "link":"/cgi-bin/luci/;stok=62cf3ca50761b0a9237a286143adf237/admin/network/wireless/radio0.network1",
+    "id":"radio0.network1",
+    "txpoweroff":0,
+    "device":{
+      "device":"radio0",
+      "name":"Generic 802.11an Wireless Controller (radio0)",
+      "up":true
+    },
+    "country":"US",
+    "bitrate":58.5,
+    "txpower":19,
+    "name":"Клиент \u0022ARnetWiFi5GHz\u0022",
+    "channel":36,
+    "assoclist":{
+      "00:27:22:70:F6:2E":{
+        "rx_short_gi":false,
+        "noise":-95,
+        "rx_mcs":6,
+        "tx_40mhz":false,
+        "rx_40mhz":false,
+        "tx_rate":58500,
+        "tx_packets":957420,
+        "tx_short_gi":false,
+        "rx_packets":1198400,
+        "tx_mcs":6,
+        "inactive":30,
+        "rx_rate":58500,
+        "signal":-52
+      }
+    },
+    "signal":-52,
+    "up":true,
+    "frequency":"5.180"
+  }
+]

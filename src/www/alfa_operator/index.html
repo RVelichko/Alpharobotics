@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ru-RU" ng-app="collabApp" class="ng-scope">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <meta http-equiv="Pragma" content="no-cache" />
+    <title>Alfa Operator</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel='stylesheet' href='css/font-roboto.css' type='text/css'>
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">-->
+    <!--<link href='https://fonts.googleapis.com/css?family=Roboto:400,900italic,900,700italic,700,500,400italic,500italic,300italic,300,100italic,100' rel='stylesheet' type='text/css'>-->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="js/fancybox/jquery.fancybox.css">
+    <link rel="stylesheet" href="css/new-style.css">
+    <script type="text/javascript" src="js/socket.io.js"></script>
+    <script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/operator/lib/adapter.js"></script>
+    <script type="text/javascript" src="js/operator/lib/angular.js"></script>
+    <script type="text/javascript" src="js/operator/filters.js"></script>
+    <script type="text/javascript" src="js/operator/services/services.js"></script>
+    <script type="text/javascript" src="js/operator/services/NotificationService.js"></script>
+    <script type="text/javascript" src="js/operator/services/VisibilityService.js"></script>
+    <script type="text/javascript" src="js/operator/services/Platform.js"></script>
+    <script type="text/javascript" src="js/operator/directives.js"></script>
+    <script type="text/javascript" src="js/fancybox/jquery.fancybox.js"></script>
+    <script type="text/javascript" src="js/utils.js"></script>
+    <script type="text/javascript" src="js/presets_editor.js"></script>
+    <script type="text/javascript" src="js/multimedia.js"></script>
+    <script type="text/javascript" src="js/media_files.js"></script>
+    <script type="text/javascript" src="js/settings.js"></script>
+    <script type="text/javascript" src="js/operator.js"></script>
+    <script type="text/javascript" src="js/move_controls.js"></script>
+</head>
+<!--<body>-->
+<body ng-controller="OperatorCtrl" ng-keydown="keydownPressed($event)" ng-keyup="keyUp($event)" ng-mouseup="releaseTimerCommands()">
+    <script src="js/operator/controllers/OperatorController.js"></script>
+
+    <div class="header row">
+        <div class="col-xs-3">
+            <div class="logo"></div>
+        </div>
+        <ul class="menu col-xs-9" role="tablist">
+            <li role="presentation" class="orange active"><a href="#menu_operator" aria-controls="menu_operator" role="tab" data-toggle="tab">ОПЕРАТОР</a></li>
+            <li role="presentation" class="green"><a href="#menu_presets_editor" aria-controls="menu_presets_editor" role="tab" data-toggle="tab">РЕДАКТОР ПРЕСЕТОВ</a></li>
+            <li role="presentation" class="blue"><a href="#menu_stt_editor" aria-controls="menu_stt_editor" role="tab" data-toggle="tab">НАСТРОЙКА ПРАВИЛ</a></li>
+            <li role="presentation" class="purple"><a href="#menu_multimedia" aria-controls="menu_multimedia" role="tab" data-toggle="tab">МУЛЬТИМЕДИА</a></li>
+        </ul>
+    </div>
+    <div class="tab-content">
+        <div role="tabpanel" class="main tab-pane fade in active operator" id="menu_operator">
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <div class="white-block buttons-height">
+                            <button id="call-robot" ng-click="callClient()" ng-hide="inTalk || calling" type="button" class="btn btn-success font_robot">Вызов робота</button>
+                            <button id="end-call-robor" ng-click="endCall()" ng-show="inTalk || calling" type="button" class="btn btn-danger btn-sm">Отключиться</button>
+                            <button id="refresh-automat" ng-click="refreshAutomat()" type="button" class="btn btn-success font_robot">Обновить</button>
+                            <button id="show-settings" data-toggle="modal" ng-click='showSettingsModal("password");' type="button" class="btn btn-info font_robot">Настройки</button>
+                        </div>
+                        <div class="white-block chart-height" style="overflow-y: auto;">
+                            <div id='operator_log' class="robot-chart"></div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="white-block videos-height">
+                            <div ng-hide="snapshots[0]" style="position:absolute;width:66px; height:66px;z-index:1000;top:290px;left:50%;transform:translate(-50%,-50%);background:url(img/preloader_waves.gif) no-repeat; color:black;">
+                            </div>
+                            <div style="height: 270px; margin-bottom:10px;">
+                                <img ng-src="{{snapshots[0]}}" style="width: 100%; min-height: 200px; background: white;" ng-hide="calling || inTalk" src="" class="grayscale">
+                                <video id="remoteVideo" autoplay="autoplay" ng-show="inTalk" style="width: 100%;" class="remoteVideo ng-hide"></video>
+                            </div>
+                            <div style="height: 270px; margin-bottom:10px;">
+                                <img ng-src="{{snapshots[1]}}" style="width: 100%; min-height: 200px; background: white;" ng-hide="calling || inTalk" src="" class="grayscale">
+                                <video autoplay="autoplay" ng-show="inTalk" style="width: 100%;" class="remoteVideo"></video>
+                            </div>
+                            <div class="arrows">
+                                <div class="col-xs-4"><button id='leftUp' ng-mousedown="commandButtonMouseDown(&quot;leftUp&quot;)" ng-mouseup="commandButtonMouseUp(&quot;leftUp&quot;)" class="btn btn-default arrow-1"></button></div>
+                                <div class="col-xs-4"><button id='up' ng-mousedown="commandButtonMouseDown(&quot;up&quot;)" ng-mouseup="commandButtonMouseUp(&quot;up&quot;)" class="btn btn-default arrow-2"></button></div>
+                                <div class="col-xs-4"><button id='rightUp' ng-mousedown="commandButtonMouseDown(&quot;rightUp&quot;)" ng-mouseup="commandButtonMouseUp(&quot;rightUp&quot;)" class="btn btn-default arrow-3"></button></div>
+                                <div class="col-xs-4"><button id='left' ng-mousedown="commandButtonMouseDown(&quot;left&quot;)" ng-mouseup="commandButtonMouseUp(&quot;left&quot;)" class="btn btn-default arrow-8"></button></div>
+                                <div class="col-xs-4"></div>
+                                <div class="col-xs-4"><button id='right' ng-mousedown="commandButtonMouseDown(&quot;right&quot;)" ng-mouseup="commandButtonMouseUp(&quot;right&quot;)" class="btn btn-default arrow-4"></button></div>
+                                <div class="col-xs-4"><button id='leftDown' ng-mousedown="commandButtonMouseDown(&quot;leftDown&quot;)" ng-mouseup="commandButtonMouseUp(&quot;leftDown&quot;)" class="btn btn-default arrow-7"></button></div>
+                                <div class="col-xs-4"><button id='down' ng-mousedown="commandButtonMouseDown(&quot;down&quot;)" ng-mouseup="commandButtonMouseUp(&quot;down&quot;)" class="btn btn-default arrow-6"></button></div>
+                                <div class="col-xs-4"><button id='rightDown' ng-mousedown="commandButtonMouseDown(&quot;rightDown&quot;)" ng-mouseup="commandButtonMouseUp(&quot;rightDown&quot;)" class="btn btn-default arrow-5"></button></div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 etalon-height">
+                        <div class="white-block send-height preset-edit-form">
+                            <div class="row">
+                                <div class="col-xs-7"><input type="text" class="preset-message col-xs-12 pull-left"></div>
+                                <div class="col-xs-1">
+                                    <input class="preset-cmd" type="hidden">
+                                    <input class="preset-smile" type="hidden">
+                                    <div class="insert_smile pull-right"></div>
+                                </div>
+                                <div class="btn-group col-xs-4">
+                                    <button type="button" class="btn btn-success">Отправить</button>
+                                    <button type="button" data-toggle="dropdown" class="btn btn-info dropdown-toggle">Русский</button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#" lang="rus">Русский</a></li>
+                                        <li><a href="#" lang="eng">English</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="white-block fast-height">
+                            <div>
+                                <div class="row presets fast-presets" id="fast-presets-operator"></div>
+                            </div>
+                        </div>
+
+                        <div class="white-block smiles-height">
+                            <div class="smiles-pannel">
+                                <div class="selected-smile"></div>
+                                <div class="smiles"></div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+
+                        <div class="white-block presets-height">
+                            <div>
+                                <ul class="nav nav-tabs presets-tab" role="tablist"></ul>
+                                <div class="tab-content presets-tab-content row presets"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div role="tabpanel" class="main tab-pane fade presets_editor" id="menu_presets_editor">
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <div id="editor_log_pannel" class="log_pannel white-block"></div>
+                    </div>
+                    <div class="col-xs-9">
+                        <div class="editor">
+                            <div id="input_pannel" class="white-block preset-edit-form">
+                                <div id="preset_name_pannel" class="row line">
+                                    <div class="col-xs-10">
+                                        <input class="preset" type="hidden">
+                                        <input id="preset_name" class="preset-name col-xs-12" type="text" placeholder="название пресета" name="comsequence">
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button id="delete_text_btn" class="preset-delete btn btn-danger col-xs-12">Удалить</button>
+                                    </div>
+                                </div>
+                                <div id="input_text" class="row line">
+                                    <div class="col-xs-10">
+                                        <div class="row">
+                                            <div class="col-xs-11">
+                                                <input id="send_text" class="preset-message col-xs-12" type="text" placeholder="сообщение" name="comsequence">
+                                            </div>
+                                            <div class="col-xs-1">
+                                                <input class="preset-cmd" type="hidden">
+                                                <input class="preset-smile" type="hidden">
+                                                <div id="insert_smile" class="insert_smile pull-right"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <button id="save_text_btn" class="preset-save btn btn-success col-xs-12">Сохранить</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="white-block">
+                                <div>
+                                    <div class="row presets fast-presets" id="fast-presets"></div>
+                                </div>
+                            </div>
+
+                            <div id="buttons_pannel" class="white-block">
+                                <div id="smiles_pannel" class="smiles-pannel">
+                                    <div id="selected_smile" class="selected-smile"></div>
+                                    <div id="smiles" class="smiles"></div>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+
+                            <div class="white-block">
+                                <div>
+                                    <ul class="nav nav-tabs presets-tab" role="tablist"></ul>
+                                    <div class="tab-content presets-tab-content row presets"></div>
+                                </div>
+
+                                <!--<div class="row presets"></div>-->
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div role="tabpanel" class="main tab-pane fade settings" id="menu_stt_editor">
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <div id="settings_log_pannel" class="log_pannel white-block"></div>
+                    </div>
+                    <div class="col-xs-9">
+                        <div class="editor">
+                            <div class="white-block">
+                                <div id="name_pannel" class="name_pannel col-xs-12">
+                                    <input id="robot_name" type="text" value="Ответы по событиям" readonly>
+                                </div>
+
+                                <div id="pannel" class="col-xs-12">
+                                    <div id="settings_pannel" class="settings_pannel short_ellipsis">
+                                        <div id="misunderstand_perc_pannel" class="row">
+                                            <div class="col-xs-9">
+                                                Речь клиента распознана менее <input id="misunderstand_perc_number" type="number" value="" maxlength="3"> процентов
+                                            </div>
+                                            <div class="col-xs-3">
+                                                <button id="misunderstand_perc_btn" class="btn btn-info pull-right"><div class="ellipsis">Распознанные фразы</div> <span></span></button>
+                                            </div>
+                                        </div>
+                                        <div id="misunderstand_pannel" class="row">
+                                            <div class="col-xs-9">
+                                                Речь клиента не содержит ключемых фраз
+                                            </div>
+                                            <div class="col-xs-3">
+                                                <button id="misunderstand_btn" class="btn btn-info pull-right"><div class="ellipsis">Ключевые фразы</div> <span></span></button>
+                                            </div>
+                                        </div>
+                                        <div id="spell_timeout_pannel" class="row">
+                                            <div class="col-xs-9">
+                                                Речь клиента превысила таймер <input id="spell_timeout_number" type="number" value="" maxlength="3"> секунд
+                                            </div>
+                                            <div class="col-xs-3">
+                                                <button id="spell_timeout_btn" class="btn btn-info pull-right"><div class="ellipsis">Превышено усл </div> <span></span></button>
+                                            </div>
+                                        </div>
+                                        <div id="timeout_pannel" class="row">
+                                            <div class="col-xs-9">
+                                                Молчание клиента превысило таймер <input id="timeout_number" type="number" value="" maxlength="3"> минут
+                                            </div>
+                                            <div class="col-xs-3">
+                                                <button id="timeout_btn" class="btn btn-info pull-right"><div class="ellipsis">Фраза по таймеру</div> <span></span></button>
+                                            </div>
+                                        </div>
+                                        <div id="alarm_clocks_pannel" class="row">
+                                            <div class="col-xs-9">
+                                                Будильники
+                                            </div>
+                                            <div class="col-xs-3">
+                                                <button id="alarm_clocks_btn" class="btn btn-info pull-right"><div class="ellipsis">Установить</div> <span></span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="name_pannel col-xs-12">
+                                    <input id="regexes_input" type="text" value="Ответы на ключевые фразы" readonly>
+                                </div>
+
+                                <div id="regexes_pannel" class="col-xs-12">
+                                    <div id="regexes_lines_pannel" class="settings_pannel"></div>
+
+                                    <div class="settings_pannel">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <button id="add_regex_btn" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Добавить</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div role="tabpanel" class="main tab-pane fade multimedia" id="menu_multimedia">
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="white-block">
+                            <div class="title">Загрузка файлов</div>
+                            <div class="file-upload">
+                                <div class="select-file">
+                                    <!--<input type="hidden" name="" id="uploaded-file" onclick="getMultimedia();">-->
+                                    <input type="file" id="uploaded-file" required="required" onchange="SendMediaFile()"/>
+                                    <!--<button class="btn btn-default" id="uploaded-file-button">Выберите файл</button>-->
+                                    <!--<iframe src="" id="file-button"></iframe>-->
+                                </div>
+                                <!--<div class="col-xs-8">-->
+                                    <!--<input type="text" class="col-xs-12" placeholder="Файл не выбран">-->
+                                <!--</div>-->
+                                <!--<div class="col-xs-2">-->
+                                    <!--<button class="btn btn-success col-xs-12">Отправить</button>-->
+                                <!--</div>-->
+                                <div class="clear"></div>
+                            </div>
+                            <div class="title pull-left">Мультимедиа файлы</div>
+                            <button class="btn btn-info pull-right refresh-files"><i class="fa fa-refresh" aria-hidden="true"></i> Обновить список</button>
+                            <div class="clear"></div>
+                            <div class="settings_pannel files" id="multimedia-files"></div>
+                            <div class="buttons">
+                                <button class="btn btn-danger pull-left" id="delete-selected">Удалить выбранное</button>
+                                <button class="btn btn-info pull-right refresh-files"><i class="fa fa-refresh" aria-hidden="true"></i> Обновить список</button>
+                                <!--<nav class="pull-right">-->
+                                    <!--<ul class="pagination">-->
+                                        <!--<li>-->
+                                            <!--<a href="#" aria-label="Previous">-->
+                                                <!--<span aria-hidden="true">&laquo;</span>-->
+                                            <!--</a>-->
+                                        <!--</li>-->
+                                        <!--<li><a href="#">1</a></li>-->
+                                        <!--<li><a href="#">2</a></li>-->
+                                        <!--<li><a href="#">3</a></li>-->
+                                        <!--<li><a href="#">4</a></li>-->
+                                        <!--<li><a href="#">5</a></li>-->
+                                        <!--<li>-->
+                                            <!--<a href="#" aria-label="Next">-->
+                                                <!--<span aria-hidden="true">&raquo;</span>-->
+                                            <!--</a>-->
+                                        <!--</li>-->
+                                    <!--</ul>-->
+                                <!--</nav>-->
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+
+    <div class="modal-shadow modal-delete">
+        <div class="modal-window">
+            <div class="modal-title">
+                <div class="modal-close pull-right"><i class="fa fa-times" aria-hidden="true"></i></div>
+                <span>Подтверждение удаления</span>
+            </div>
+            <div class="modal-message"></div>
+            <div class="modal-buttons">
+                <button class="btn btn-success modal-cancel">Отмена</button>
+                <button class="btn btn-danger modal-confirm">Удалить</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-shadow modal-add-tab">
+        <div class="modal-window">
+            <div class="modal-title">
+                <div class="modal-close pull-right"><i class="fa fa-times" aria-hidden="true"></i></div>
+                <span>Добавление группы пресетов</span>
+            </div>
+            <div class="modal-message">
+                <input type="text" class="tab-name col-xs-12">
+                <div class="clear"></div>
+            </div>
+            <div class="modal-buttons">
+                <button class="btn btn-success modal-confirm"><i class="fa fa-floppy-o"></i> Сохранить</button>
+                <button class="btn btn-danger modal-cancel"><i class="fa fa-undo"></i> Отмена</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-shadow modal-edit-setting">
+        <div class="modal-window">
+            <div class="modal-title">
+                <div class="modal-close pull-right"><i class="fa fa-times" aria-hidden="true"></i></div>
+                <span>Подтверждение удаления</span>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-buttons">
+                <button class="btn btn-success modal-confirm"><i class="fa fa-floppy-o"></i> Сохранить</button>
+                <button class="btn btn-danger modal-cancel"><i class="fa fa-undo"></i> Отмена</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div id="notifyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-hide="notifyGranted" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Разрешите оповещения</h4>
+                        </div>
+                        <div class="modal-body">
+                            <button type="button" requestnotifications="" class="btn btn-primary">Включить оповещения</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Настройки</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div ng-hide="inTalk || calling" class="row">
+                                <div class="col-xs-6">
+                                    Камера 1
+                                    <select ng-model="usedRemoteMediaSettings.cams[0]" ng-options="source.id as source.label for source in remoteMediaSources | filter:{kind: &quot;video&quot;}" class="form-control ng-pristine ng-valid">
+                                        <option value="?" selected="selected"></option>
+                                    </select>
+                                </div>
+                                <div class="col-xs-6">
+                                    Камера 2
+                                    <select ng-model="usedRemoteMediaSettings.cams[1]" ng-options="source.id as source.label for source in remoteMediaSources | filter:{kind: &quot;video&quot;}" class="form-control ng-pristine ng-valid">
+                                        <option value="?" selected="selected"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    Звук
+                                    <select ng-model="usedRemoteMediaSettings.mics[0]" ng-options="source.id as source.label for source in remoteMediaSources | filter:{kind: &quot;audio&quot;}" class="form-control ng-pristine ng-valid">
+                                        <option value="" selected="selected"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-xs-6 pull-right text-right">
+                                    <button type="button" ng-click="saveCams()" style="margin-right: 20px;" data-dismiss="modal" class="btn btn-primary">Сохранить</button>
+                                    <button type="button" data-dismiss="modal" class="btn btn-danger">Отменить</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- основа-->
+            <div ng-show="clientBusy" class="alert alert-danger center-block ng-hide">Клиент говорит с другим оператором</div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="js/move_controls.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            setHeights();
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                setHeights();
+//                    $('.tab-pane').each(function(){
+//                        $(this).find('.log_pannel').height($(this).find('.editor').height() - 32);
+//                    });
+            });
+
+            $('.modal-cancel').click(function(){
+                $(this).closest('.modal-shadow').hide();
+            });
+            $('.modal-close').click(function(){
+                $(this).closest('.modal-shadow').hide();
+            });
+        });
+        $(window).resize(function() {
+            setHeights();
+        });
+    </script>
+</body>
+</html>

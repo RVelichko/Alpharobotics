@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>WebRTC Chat Demo</title>
+		<meta charset="utf-8">
+		<script src="js/socket.io.js"></script>
+		<script src="js/check_devices.js"></script>
+		<script src="js/signaling_socket.js"></script>
+		<script src="js/rtc_peer_connection.js"></script>
+		<script src="js/user_media.js"></script>
+		<script src="js/stream_devices.js"></script>
+		<script src="js/robot_automat.js"></script>
+		<script src="js/operator_automat.js"></script>
+		<script src="js/robot_framer.js"></script>
+		<script src="js/operator_framer.js"></script>
+		<style>
+			.item {
+				display: inline-block;
+				width: 300px;
+				margin: 20px 10px;
+				background: white;
+				padding: 10px 0px;
+			}
+
+			.item span{
+				padding-bottom: 15px;
+				display: block;
+				font-size: 24px;
+				color: rgb(100,100,100)
+			}
+
+			video {
+				width: 320px;
+				height: 240px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="operator_video_recv_id">
+			<div class="item" style="height: 270px; margin-bottom:10px;text-align:center;vertical-align:middle">
+				<span> Top Video Operator </span>
+				<video id="video_top_id" autoplay controls></video>
+			</div>
+			<div class="item" style="height: 270px; margin-bottom:10px;text-align:center;vertical-align:middle">
+				<span> Bottom Video Operator </span>
+				<video id="video_bottom_id" autoplay controls></video>
+			</div>
+		</div>
+		<div id="operator_frames_recv_id">
+			<div class="item" style="height: 270px; margin-bottom:10px;text-align:center;vertical-align:middle">
+				<span> Top Canvas Operator </span>
+				<canvas id="canvas_top" width="640" height="480" ></canvas>
+			</div>
+			<div class="item" style="height: 270px; margin-bottom:10px;text-align:center;vertical-align:middle">
+				<span> Bottom Canvas Operator </span>
+				<canvas id="canvas_bottom" width="640" height="480" ></canvas>
+			</div>
+		</div>
+		<div id="robot_source_id"></div>
+		<script src="js/main.js"></script>
+    </body>
+</html>

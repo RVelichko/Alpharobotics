@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?> <messages>
+    <message id="Title">Сервер преобразования TTS</message>
+    <message id="TTSPannel"><h3>Панель загрузки текстов</h3></message>
+
+    <message id="load_file_btn">Программа</message>
+    <message id="send_btn">Отправить</message>
+</messages>

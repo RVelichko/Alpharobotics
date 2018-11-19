@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html class="js consumer build-stable chrome win64-incapable linux twisty-js" lang="ru-RU"><head>
+	<meta charset="utf-8">
+	<meta content="initial-scale=1, minimum-scale=1, width=device-width" name="viewport">
+	<title>Пользовательская страница</title>
+	<link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin" rel="stylesheet">
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<div id="images_buttons"></div>
+
+	<div id="show_image_pannel" class="top_pannel" hidden>
+		<button id="image_close_btn">
+			<div class="image del_img"></div>
+		</button>
+		<div id="image_pannel"></div>
+	</div>
+
+	<div id="mic_pannel">
+		<img id="mic_img" src="mic.gif">
+	</div>
+
+	<script type="text/javascript" src="socket.io.js" charset="utf-8"></script>
+	<script type="text/javascript" src="utils.js" charset="utf-8"></script>
+	<script type="text/javascript" src="main.js" charset="utf-8"></script>
+</body>
+</html>

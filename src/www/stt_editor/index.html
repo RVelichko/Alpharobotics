@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+	<head>
+		<meta charset="utf-8">
+		<title>Редактор голосовых ответов и событий робота</title>
+		<link rel="stylesheet" href="style.css">
+		<script src="utils.js"></script>
+	</head>
+	<body>
+		<div id="editor" class="border">
+			<div id="name_pannel" class="border">
+				<input id="robot_name" type="text" placeholder="Робот не доступен для редактирования" readonly>
+			</div>
+
+			<div id="pannel" slass="row">
+				<div id="settings_pannel">
+					<div id="misunderstand_perc_pannel" class="row border_2">
+						<input id="misunderstand_perc" class="input_readonly" type="text" value="Речь клиента распознана менее" readonly>
+						<input id="misunderstand_perc_number" type="number" value="70">
+						<input id="misunderstand_perc_type" class="input_readonly" type="text" value="процентов" readonly>
+						<button id="misunderstand_perc_btn" class="right"> ... </button>
+					</div>
+					<div id="misunderstand_pannel" class="row border_2">
+						<input id="misunderstand" class="input_readonly" type="text" value="Речь клиента не содержит ключемых фраз" readonly>
+						<button id="misunderstand_btn" class="right"> ... </button>
+					</div>
+					<div id="spell_timeout_pannel" class="row border_2">
+						<input id="spell_timeout" type="text" class="input_readonly" value="Речь клиента превысила таймер" readonly>
+						<input id="spell_timeout_number" type="number" value="30">
+						<input id="spell_timeout_type" class="input_readonly" type="text" value="секунд" readonly>
+						<button id="spell_timeout_btn" class="right"> ... </button>
+					</div>
+					<div id="timeout_pannel" class="row border_2">
+						<input id="timeout" type="text" class="input_readonly" value="Молчание клиента превысило таймер" readonly>
+						<input id="timeout_number" type="number" value="30">
+						<input id="timeout_type" class="input_readonly" type="text" value="минут" readonly>
+						<button id="timeout_btn" class="right"> ... </button>
+					</div>
+					<div id="alarm_clock_pannel" class="row border_2">
+						<input id="alarm_clock" class="input_readonly" type="text" value="Будильники" readonly>
+						<button id="alarm_clock_btn" class="right"> ... </button>
+					</div>
+					<div id="regexes_pannel" class="border_2">
+						<input id="regexes_input" type="text" class="input_readonly" value="Регулярные выражения ключевых фраз" readonly>
+						<div id="regexes_lines_pannel"></div>
+						<div class="row border">
+							<button id="add_regex_btn" class="right">
+								<div class="image add_img"></div> добавить
+							</button>
+						</div>
+					</div>
+				</div>
+
+				<div id="log_pannel" class="border"></div>
+			</div>
+		</div>
+
+		<div id="readonly_pannel" class="readonly_pannel" hidden>
+		</div>
+
+		<div id="misunderstand_perc_show_pannel" class="show_pannel" hidden>
+			<button id="misunderstand_perc_close_btn" class="right">
+				<div class="image del_img"></div>
+			</button>
+			<div>
+				<input class="input_readonly" type="text" value="Речь клиента не распознана" readonly>
+			</div>
+			<div class="border">
+				<input id="misunderstand_perc_img_url" class="input_img_url_edit" type="text" placeholder="< URL картинки события >">
+			</div>
+			<div id="misunderstand_perc_lines">
+			</div>
+			<div class="row border">
+				<button id="misunderstand_perc_add_btn" class="right">
+					<div class="image add_img"></div> добавить
+				</button>
+			</div>
+			<button id="misunderstand_perc_save_btn">
+				<div class="image save_img"></div> сохранить
+			</button>
+			<button id="misunderstand_perc_cancel_btn">
+				<div class="image cancel_img"></div> отменить
+			</button>
+		</div>
+
+		<div id="misunderstand_show_pannel" class="show_pannel" hidden>
+			<button id="misunderstand_close_btn" class="right">
+				<div class="image del_img"></div>
+			</button>
+			<div>
+				<input class="input_readonly" type="text" value="Речь клиента не содержит ключемых фраз" readonly>
+			</div>
+			<div class="border">
+				<input id="misunderstand_img_url" class="input_img_url_edit" type="text" placeholder="< URL картинки события >">
+			</div>
+			<div id="misunderstand_lines">
+			</div>
+			<div class="row border">
+				<button id="misunderstand_add_btn" class="right">
+					<div class="image add_img"></div> добавить
+				</button>
+			</div>
+			<button id="misunderstand_save_btn">
+				<div class="image save_img"></div> сохранить
+			</button>
+			<button id="misunderstand_cancel_btn">
+				<div class="image cancel_img"></div> отменить
+			</button>
+		</div>
+
+		<div id="spell_timeout_show_pannel" class="show_pannel" hidden>
+			<div>
+				<input class="input_readonly" type="text" value="Речь клиента превысила таймер" readonly>
+				<button id="spell_timeout_close_btn" class="right">
+					<div class="image del_img"></div>
+				</button>
+			</div>
+			<div class="border">
+				<input id="spell_timeout_img_url" class="input_img_url_edit" type="text" placeholder="< URL картинки события >">
+			</div>
+			<div id="spell_timeout_lines">
+			</div>
+			<div class="row border">
+				<button id="spell_timeout_add_btn" class="right">
+					<div class="image add_img"></div> добавить
+				</button>
+			</div>
+			<button id="spell_timeout_save_btn">
+				<div class="image save_img"></div> сохранить
+			</button>
+			<button id="spell_timeout_cancel_btn">
+				<div class="image cancel_img"></div> отменить
+			</button>
+		</div>
+
+		<div id="timeout_show_pannel" class="show_pannel" hidden>
+			<div>
+				<input class="input_readonly show_input_readonly" type="text" value="Молчание клиента превысило таймер" readonly>
+				<button id="timeout_close_btn" class="right">
+					<div class="image del_img"></div>
+				</button>
+			</div>
+			<div class="border">
+				<input id="timeout_img_url" class="input_img_url_edit" type="text" placeholder="< URL картинки события >">
+			</div>
+			<div id="timeout_lines">
+			</div>
+			<div class="row border">
+				<button id="timeout_add_btn" class="right">
+					<div class="image add_img"></div> добавить
+				</button>
+			</div>
+			<button id="timeout_save_btn">
+				<div class="image save_img"></div> сохранить
+			</button>
+			<button id="timeout_cancel_btn">
+				<div class="image cancel_img"></div> отменить
+			</button>
+		</div>
+
+		<div id="alarm_clock_show_pannel" class="show_pannel" hidden>
+			<button id="alarm_clock_close_btn" class="right">
+				<div class="image del_img"></div>
+			</button>
+			<div>
+				<input class="input_readonly show_input_readonly" type="text" value="Будильники" readonly>
+			</div>
+			<div id="alarm_clock_lines">
+			</div>
+			<div class="row border">
+				<button id="alarm_clock_add_btn" class="right">
+					<div class="image add_img"></div> добавить
+				</button>
+			</div>
+			<button id="alarm_clock_save_btn">
+				<div class="image save_img"></div> сохранить
+			</button>
+			<button id="alarm_clock_cancel_btn">
+				<div class="image cancel_img"></div> отменить
+			</button>
+		</div>
+
+		<div id="regexp_show_pannel" class="border" hidden>
+		</div>
+
+		<div id="add_alarm_show_pannel" class="show_pannel" hidden>
+			<div>
+				<input class="add_input_readonly" type="text" value="Создание правила" readonly>
+				<button id="add_alarm_show_close_btn">
+					<div class="image del_img"></div>
+				</button>
+			</div>
+			<div class="border add_show_input">
+				<input id="new_alarm_clock_h" class="new_object new_alarm_clock" type="number" placeholder="10">
+				<input id="new_alarm_clock_m" class="new_object new_alarm_clock" type="number" placeholder="10">
+				<input id="new_alarm_msg" class="new_object new_alarm_msg" type="text" placeholder="добавте фразу будильника...">
+			</div>
+			<button id="add_alarm_save_btn">
+				<div class="image save_img"></div> сохранить
+			</button>
+			<button id="add_alarm_cancel_btn">
+				<div class="image cancel_img"></div> отменить
+			</button>
+		</div>
+
+		<div id="add_show_pannel" class="show_pannel" hidden>
+			<div>
+				<input class="add_input_readonly" type="text" value="Создание правила" readonly>
+				<button id="add_show_close_btn">
+					<div class="image del_img"></div>
+				</button>
+			</div>
+			<div class="border add_show_input">
+				<input id="new_regex" class="new_object new_regex" type="text" placeholder="добавьте правило...">
+				<input id="new_resp" class="new_object new_resp" type="text" placeholder="добавте первую фразу ответа...">
+			</div>
+			<button id="add_save_btn">
+				<div class="image save_img"></div> сохранить
+			</button>
+			<button id="add_cancel_btn">
+				<div class="image cancel_img"></div> отменить
+			</button>
+		</div>
+
+		<div id="add_mis_perc_show_pannel" class="show_pannel" hidden>
+			<div>
+				<input class="add_input_readonly" type="text" value="Создание правила" readonly>
+				<button id="add_mis_perc_show_close_btn">
+					<div class="image del_img"></div>
+				</button>
+			</div>
+			<div class="border add_show_input">
+				<input id="new_mis_perc" class="new_object new_str" type="text" placeholder="добавьте правило...">
+			</div>
+			<button id="add_mis_perc_save_btn">
+				<div class="image save_img"></div> сохранить
+			</button>
+			<button id="add_mis_perc_cancel_btn">
+				<div class="image cancel_img"></div> отменить
+			</button>
+		</div>
+
+		<div id="add_mis_show_pannel" class="show_pannel" hidden>
+			<div>
+				<input class="add_input_readonly" type="text" value="Создание правила" readonly>
+				<button id="add_mis_show_close_btn">
+					<div class="image del_img"></div>
+				</button>
+			</div>
+			<div class="border add_show_input">
+				<input id="new_mis" class="new_object new_str" type="text" placeholder="добавьте правило...">
+			</div>
+			<button id="add_mis_save_btn">
+				<div class="image save_img"></div> сохранить
+			</button>
+			<button id="add_mis_cancel_btn">
+				<div class="image cancel_img"></div> отменить
+			</button>
+		</div>
+
+		<div id="add_str_show_pannel" class="show_pannel" hidden>
+			<div>
+				<input class="add_input_readonly" type="text" value="Создание правила" readonly>
+				<button id="add_str_show_close_btn">
+					<div class="image del_img"></div>
+				</button>
+			</div>
+			<div class="border add_show_input">
+				<input id="new_str" class="new_object new_str" type="text" placeholder="добавьте правило...">
+			</div>
+			<button id="add_str_save_btn">
+				<div class="image save_img"></div> сохранить
+			</button>
+			<button id="add_str_cancel_btn">
+				<div class="image cancel_img"></div> отменить
+			</button>
+		</div>
+
+		<div id="add_spell_timeout_show_pannel" class="show_pannel" hidden>
+			<div>
+				<input class="add_input_readonly" type="text" value="Создание правила" readonly>
+				<button id="add_spell_timeout_show_close_btn">
+					<div class="image del_img"></div>
+				</button>
+			</div>
+			<div class="border add_show_input">
+				<input id="new_spell_timeout_str" class="new_object new_str" type="text" placeholder="добавьте правило...">
+			</div>
+			<button id="add_spell_timeout_save_btn">
+				<div class="image save_img"></div> сохранить
+			</button>
+			<button id="add_spell_timeout_cancel_btn">
+				<div class="image cancel_img"></div> отменить
+			</button>
+		</div>
+
+		<div id="add_timeout_show_pannel" class="show_pannel" hidden>
+			<div>
+				<input class="add_input_readonly" type="text" value="Создание правила" readonly>
+				<button id="add_timeout_show_close_btn">
+					<div class="image del_img"></div>
+				</button>
+			</div>
+			<div class="border add_show_input">
+				<input id="new_timeout_str" class="new_object new_str" type="text" placeholder="добавьте правило...">
+			</div>
+			<button id="add_timeout_save_btn">
+				<div class="image save_img"></div> сохранить
+			</button>
+			<button id="add_timeout_cancel_btn">
+				<div class="image cancel_img"></div> отменить
+			</button>
+		</div>
+
+		<div id="delete_confirm" class="delete_confirm" hidden>
+			<div id="delete_name"></div>
+			<button id="cancel_delete_btn" style="background: green">
+				<div class="image cancel_img"></div> Отменить
+			</button>
+			<button id="confirm_delete_btn" style="background: red">
+				<div class="image confirm_img"></div> Подтвердить
+			</button>
+		</div>
+
+		<div id="readonly_child_pannel" class="readonly_pannel" hidden>
+		</div>
+
+		<div id="delete_child_confirm" class="delete_confirm" hidden>
+			<div id="delete_child_name"></div>
+			<button id="cancel_delete_child_btn" style="background: green">
+				<div id="image cancel_img"></div> Отменить
+			</button>
+			<button id="confirm_delete_child_btn" style="background: red">
+				<div id="image confirm_img"></div> Подтвердить
+			</button>
+		</div>
+		<script src="main.js"></script>
+	</body>
+</html>
+
+

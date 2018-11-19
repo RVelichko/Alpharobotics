@@ -1,0 +1,17 @@
+{
+    "name":"KIKI-310001",
+    "room_id":"KIKI-310001",
+    "automat_url":"https://109.120.152.76:38828",
+    "operator_url": "https://109.120.152.76:38828/KIKI-310001/operator",
+    "robots_server_url":"ws://109.120.152.76:20001/rest/operator",
+    "json_save_url": "ws://109.120.152.76:20000/rest/saver",
+    "presets_save_path": "KIKI-310001/alfa_operator/presets.json",
+    "settings_save_path": "KIKI-310001/alfa_operator/settings.json",
+    "presets_url": "http://109.120.152.76/KIKI-310001/alfa_operator/presets.json",
+    "settings_url": "http://109.120.152.76/KIKI-310001/alfa_operator/settings.json",
+    "smiles_url": "http://109.120.152.76/KIKI-310001/alfa_operator/smiles.json",
+    "multimedia_save_path": "KIKI-310001/alfa_operator/media/",
+    "multimedia_rest_url": "ws://109.120.152.76:20003",
+    "multimedia_list_url": "http://109.120.152.76/KIKI-310001/alfa_operator/media/media.json",
+    "multimedia_files_url": "http://109.120.152.76/KIKI-310001/alfa_operator/media/"
+}

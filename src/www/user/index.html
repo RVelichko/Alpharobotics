@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+<head>
+	<meta charset="utf-8">
+	<meta property="fb:admins" content="" />
+	<meta name="description" content="">
+	<title>Speech To Text Service</title>
+	<link rel="canonical" href="https://speechtotext.adrobots.ru/"/>
+	<script src="spchscript.js" type="text/javascript"></script>
+	<link rel="icon" href="favicon.ico" type="image/x-icon"/>
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+	<script src="somescript.js" type="text/javascript"></script>
+	<script type="text/javascript" src="jquery-2.1.3.min.js"></script>
+	<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+	<script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
+</head>
+
+<div id='user'></div>
+<div id='tts_answer' style='display:none;'></div>
+
+<form  itemscope itemtype="http://schema.org/WebApplication" id='myform' onsubmit="releaseres();" method='post'>
+	<div id="wrapper">
+		<div id="header">
+		</div><!-- #header-->
+		<div id="middle">
+			<div id="container">
+				<div id="content">
+					<script type="text/javascript">support_speech_attribute();</script>
+					<details>
+						<summary>
+							<h3  itemprop="headline">Сервис речевого ввода</h3>
+						</summary>
+						<p itemprop="description" >
+							Голосовой сервис позволяет вводить текст, используя микрофон. Смена языка ввода может проводиться динамически.
+							В настоящее время голосовой ввод возможен только в браузере <span itemprop="browserRequirements">Chrome</span>.
+						</p>
+						<p class="last">
+							При первом посещении сайта вверху браузера возникнет панелька с просьбой разрешить доступ к микрофону. Нажмите там кнопку "Разрешить"
+							<br/> Говорите в микрофон
+							<br/> Кнопка <b>A/a</b> меняет регистр первой буквы слова, рядом с которым находится курсор
+							<br/> Кнопка <b>Отменить</b> удаляет из результирующего поля последний введенный фрагмент
+							<br/>Кнопки пунктуации служат для ввода знаков с помощью мыши
+							<br/>Текст в результирующее поле добавляется после последней позиции курсора. Если был выделен фрагмент текста в результирующем поле, то введенный текст будет его заменять
+							<br/>Если отмечен флажок <b>Начинать предложение с заглавной</b>, то первая буква фразы, введенной голосом, будет делаться прописной, если ей в результирующем поле предшествует точка, восклицательный знак,  вопросительный знак или знак начала абзаца.
+							<br/>Если отмечен флажок <b>Заменять слова пунктуации</b>, то слова в голосовом вводе, совпадающие со знаками препинания, будут  заменяться на эти знаки (можно навести мышь на кнопку знака, чтобы увидеть соответствующее ему слово)
+							<br/>Смена языка для голосового ввода осуществляется выбором соответствующего языка в выпадающем списке
+							<br>Если отмечен флажок <b>Выполнять команды</b>, то во время  ввода текста можно давать команды голосом.
+							<br>Если отмечен флажок <b>Вывод в буфер обмена</b>, то текст будет поступать не в результирующее поле, а в буфер обмена. Флажок работает только при установленном расширении блокнота.
+							<br>Если отмечен флажок <b>Возобновлять при ошибках</b>, то запись не будет отключаться самостоятельно при ошибках и длительном молчании.
+							<br>Поле <b>Уровень распознавания</b> отображает качество распознавания речи или вид ошибки, если она возникла.
+						</p>
+					</details>
+					<input type=submit name=sublogin style="visibility:hidden">
+					<table id="tblsetting" style="">
+						<tr>
+							<td>
+								<div style="margin-bottom:4px;"><label>Язык голосового ввода
+									<select name="pagelang" id="pagelang" onchange="changelang(this);">
+
+										<option value="ru-RU" selected="selected" >русский</option>
+										<option value="uk-UK"  >украинский</option>
+										<option value="en-US"   >английский</option>
+										<option value="de-DE"  >немецкий</option>
+										<option value="fr-FR"   >французcкий</option>
+										<option value="es-ES"   >испанский</option>
+										<option value="it-IT"   >итальянский</option>
+
+									</select>
+								</label>
+								</div>
+
+								<div style="display: none">
+									<label>
+										<input id="chksound" name="chksound" onchange="this.form.submit();" type="checkbox"  />
+										Уровень звука</label>&nbsp;<canvas id="canvsound" width="130" height="15" style=" border:1px solid #000000;"></canvas>
+								</div>
+
+								<label>Уровень распознавания&nbsp;<span style="background-color: #BFBCB9;" id="txtqual">&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span>
+								</label>
+
+							</td>
+
+							<td>
+								<div  style="">
+									<label>
+										<input id="chkauto" name="chkauto" type="checkbox" checked=checked />
+										Возобновлять при ошибках</label>
+								</div>
+								<label>
+									<input id="chkcom" name="chkcom" type="checkbox" checked=checked />
+									Выполнять команды</label>
+								<div style="">
+
+									<label>
+										<input id="chkcap" name="chkcap" type="checkbox" checked=checked />
+										Начинать предложение с заглавной</label>
+									<br>
+									<label>
+										<input id="chkpunct" name="chkpunct" type="checkbox" checked=checked />
+										Заменять слова пунктуации</label>
+									<br>
+								</div>
+							</td>
+						</tr>
+					</table>
+
+					<br>
+
+					<div style="margin-bottom:5px">
+						<input id="zabbtn"  type="button" value=" &larr; " title="Backspace" onclick="zaboi();" />
+						<input id="capbtn"  type="button" value="A/a" title="Смена регистра первой буквы" onclick="add_cap();" />
+						<input id="allcapbtn"  type="button" value="AA" title="Прописные буквы" onclick="all_cap();" />
+						<input id="rembtn" title="Отменить" type="button" value="Отменить"  onclick="rem_speech();" />
+						<input title="Скопировать" disabled="disabled" id="copyall" type="button" value="Скопировать" onclick="copy_all();" />
+					</div>
+
+					<table style="width:100%;" >
+						<tr>
+							<td style="width:140px;">
+								<input title="Кнопка непрерывной записи" style="height:40px;" id="recbtn" type="button" onclick="togglerec();" value=" включить запись " >
+							</td>
+							<td>
+								<div style="width:100%;">
+									<label>
+										<textarea name="copyel" title="Поле предварительного показа" readonly id="copyel" style="width: 100%;" cols="80" rows="4" spellcheck="true"  ></textarea>
+									</label>
+								</div>
+
+							</td>
+
+						</tr>
+					</table>
+
+					<div style="">
+						<input title="Новая строка" class="punbtn" id="carbtn" type="button" value='\n' onclick="add_punct(this);" />
+						<input title="Открыть/Закрыть кавычки" class="punbtn" id="qoutesbtn" type="button" value='"' onclick="add_punct(this);" />
+						<input title="Тире (только кнопка)" class="punbtn" id="mdashbtn" type="button" value=" &mdash;" onclick="add_punct(this);" />
+						<input title="Дефис (только кнопка)" class="punbtn" id="ndashbtn" type="button" value="-" onclick="add_punct(this);" />
+
+						<input title="Двоеточие" class="punbtn" id="colonbtn" type="button" value=":" onclick="add_punct(this);" />
+						<input title="Точка запятой" class="punbtn" id="semicolonbtn" type="button" value=";" onclick="add_punct(this);" />
+						<input title="Звездочка" class="punbtn" id="asteroid" type="button" value="*" onclick="add_punct(this);" />
+						<input title="Открыть скобку" class="punbtn" id="oskobka" type="button" value="(" onclick="add_punct(this);" />
+						<input title="Закрыть скобку" class="punbtn" id="zskobka" type="button" value=")" onclick="add_punct(this);" />
+						<input title="Восклицательный знак" class="punbtn" id="exclamationbtn" type="button" value="!" onclick="add_punct(this);" />
+						<input title="Вопросительный знак" class="punbtn" id="questionbtn" type="button" value="?" onclick="add_punct(this);" />
+						<input title="Запятая" class="punbtn" id="commabtn" type="button" value="," onclick="add_punct(this);" />
+						<input title="Точка" class="punbtn" id="dotbtn" type="button" value="." onclick="add_punct(this);" />
+						<input title="Пробел (только кнопка)" class="punbtn" id="spacebtn" type="button" value=" " onclick="add_punct(this);" />
+						<!--<button id="keyimg" onclick="showkeyb(); return false;"  title="Виртуальная клавиатура"><img  src="/i/keypic.png" alt=""  style="vertical-align: middle"></button>-->
+						<input title="Теги  HTML" class="punbtn" id="htmlbtn" type="button" value="html" onclick="showpop(this);" />
+						<!--<img id="keyimg" src="keypic.png" alt="Виртуальная клавиатура" onclick="showkeyb();">-->
+					</div>
+					<label><span>Результирующее поле</span> <textarea  name="docel" id="docel" style="width: 100%;" cols="80" rows="20" spellcheck="true"></textarea>
+					</label>
+					<div>
+
+						﻿</div><!-- #content-->
+				</div><!-- #container-->
+
+			</div><!-- .sidebar#sideRight -->
+		</div><!-- #middle-->
+	</div><!-- #wrapper -->
+	<div id="footer">
+	</div><!-- #footer -->
+</form>
+</body>
+</html>
+
+

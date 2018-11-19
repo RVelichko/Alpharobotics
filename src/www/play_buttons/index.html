@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+		<title>Play buttons</title>
+		<link rel="stylesheet" href="styles.css">
+	</head>
+	<body>
+		<div id="status"></div>
+		<table id="table">
+			<tr>
+				<td>№</td>
+				<td>Play</td>
+			</tr>
+		</table>
+		<script>
+			function sendGetRequest(url, callback) {
+				var req = new XMLHttpRequest();
+				req.open("GET", url, true);
+				req.onreadystatechange = function(){
+					callback(req);
+				};
+				req.send(null);
+			}
+
+			function addRow(index, text) {
+				var table = document.getElementById("table");
+				var rowCount = table.rows.length;
+				var row = table.insertRow(rowCount);
+				row.insertCell(0).innerHTML = index;
+				row.insertCell(1).innerHTML = '<button id=btn_'+index+'>'+text+'</button>';
+				var btn = document.getElementById("btn_" + index).addEventListener("click", function() {
+					console.log("send to play \"" + text + "\"");
+					sendGetRequest("http://10.0.0.7/play.php?file=" + text, function(req) {
+						if (req.readyState == 4) {
+							console.log(req.status + ': ' + req.statusText);
+							document.getElementById("status").innerHTML = text + ": " + req.status + ': ' + req.statusText;
+						}
+					});
+				}, false);
+			}
+
+			sendGetRequest("http://10.0.0.7/files.php", function(req) {
+				if (req.readyState == 4) {
+					console.log(req.status + ': ' + req.statusText);
+					document.getElementById("status").innerHTML = req.status + ': ' + req.statusText;
+					if (req.status === 200) {
+						var arr = req.responseText.split("\n");
+						arr.forEach(function(item, i) {
+							if (item.indexOf(".txt") != -1 ||
+									item.indexOf(".bvm") != -1 ||
+									item.indexOf(".wav") != -1) {
+								addRow(i, item);
+								console.log("arr[" + i + "]=" + item);
+							}
+						});
+					}
+				}
+			 });
+		</script>
+	</body>
+</html>

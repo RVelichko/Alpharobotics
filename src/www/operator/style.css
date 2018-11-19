@@ -1,0 +1,459 @@
+/* Space out content a bit */
+body {
+    padding-top: 5px;
+    padding-bottom: 20px;
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing,
+.footer {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Custom page header */
+.header {
+    border-bottom: 1px solid #e5e5e5;
+}
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 40px;
+    padding-bottom: 19px;
+}
+
+/* Custom page footer */
+.footer {
+    padding-top: 19px;
+    color: #777;
+    border-top: 1px solid #e5e5e5;
+}
+
+/* Customize container */
+
+.container-narrow > hr {
+    margin: 30px 0;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+    text-align: center;
+    border-bottom: 1px solid #e5e5e5;
+}
+.jumbotron .btn {
+    font-size: 21px;
+    padding: 14px 24px;
+}
+
+/* Supporting marketing content */
+.marketing {
+    margin: 40px 0;
+}
+.marketing p + h4 {
+    margin-top: 28px;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+    /* Remove the padding we set earlier */
+    .header,
+    .marketing,
+    .footer {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    /* Space out the masthead */
+    .header {
+        margin-bottom: 30px;
+    }
+    /* Remove the bottom border on the jumbotron for visual effect */
+    .jumbotron {
+        border-bottom: 0;
+    }
+}
+/* Custom styles */
+#localVideo, .localSnapshot{
+    width: 320px;
+    height: 240px;
+}
+
+.grayscale{
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+
+#incomingCall{
+    margin-bottom: 20px;
+}
+
+.fullscreen{
+    position:absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+.localToBottom{
+    position: fixed;
+    right: 5px;
+    bottom: 5px;
+    z-index: 100;
+    width: 160px !important;
+    height: 120px !important;
+}
+
+#splashScreen{
+    /*position: fixed;*/
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+@-webkit-keyframes blink {
+    0% {
+        opacity:1;
+    }
+    50% {
+        opacity:0;
+    }
+    100% {
+        opacity:1;
+    }
+}
+@-moz-keyframes blink {
+    0% {
+        opacity:1;
+    }
+    50% {
+        opacity:0;
+    }
+    100% {
+        opacity:1;
+    }
+}
+.blink {
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    -ms-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+
+    -webkit-animation-direction: normal;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-name: blink;
+    -webkit-animation-timing-function: ease-in-out;
+
+    -moz-animation-direction: normal;
+    -moz-animation-duration: 2s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-name: blink;
+    -moz-animation-timing-function: ease-in-out;
+}
+
+.loading{
+    background: url(/images/common/preloader_waves.gif) center center no-repeat;
+}
+
+#arrowButtonHolder button{
+    margin: 1px 1px;
+}
+#chatLog{
+    color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 20px;
+    padding-left: 10px;
+}
+#chatCommands button{
+    margin: 5px;
+}
+
+.operatorLocalVideo{
+    width: 100% !important;
+    height: auto !important;
+}
+
+#logPanel .panel-body{
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+select{
+    overflow: hidden;
+    width: 100%;
+}
+
+iframe {
+    display: block;       /* iframes are inline by default */
+    background: #000;
+    border: none;         /* Reset default border */
+    /*min-height: 70vp;        /!* Viewport-relative units *!/*/
+    min-height: 510px;        /* Viewport-relative units */
+    margin: 0px 1% 5px 1%;
+    padding: 5px 1% 5px 1%;
+    width: 98%;
+    border: 1px solid rgb(0, 200, 0); /* Параметры рамки */
+    border-radius: 5px;
+    background: rgb(217, 245, 187);
+}
+
+.border {
+    border: 1px solid rgb(0, 200, 0); /* Параметры рамки */
+    border-radius: 5px;
+    margin: 5px 1% 5px 1%;
+}
+
+.row {
+    display: table;
+    height: 100%;
+    width: 98%;
+}
+
+.selected-smile-panel {
+    display: inline-block;
+    width: 90px;
+    height: 90px;
+}
+
+#buttons_log {
+    width: 100%;
+    margin: 0px 0px 0px 0px;
+}
+
+#log_pannel {
+    display: inline-block;
+    width: 34%;
+    margin: 0px 0px 5px 1%;
+    padding: 5px 5px 5px 5px;
+    vertical-align: top;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    float: left;
+    background: rgb(255, 255, 255);
+}
+
+#buttons_pannel {
+    display: inline-block;
+    width: 63%;
+    margin: 0px 0px 5px 1%;
+    vertical-align: top;
+}
+
+#smiles_pannel {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0px 0px 0px 0px;
+    width: 100%;
+    height: 100%;
+    background: rgb(255, 255, 255);
+}
+
+#presets {
+    position: relative;
+    display: inline-block;
+    margin: 5px 0px 0px 0px;
+    padding: 15px 15px 15px 15px;
+    vertical-align: middle;
+    width: 100%;
+    background: rgb(255, 255, 255);
+}
+
+#operator_pannel {
+    display: inline-block;
+    width: 74%;
+    vertical-align: top;
+}
+
+#selected_smile {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 5px 5px 5px 5px;
+    width: 120px;
+    height: 120px;
+    border: 1px solid rgb(0, 200, 0); /* Параметры рамки */
+    border-radius: 5px;
+}
+
+#smiles {
+    display: inline-block;
+    padding: 15px 15px 15px 15px;
+    vertical-align: middle;
+}
+
+#input_text {
+    margin: 15px 0px 15px 1%;
+    vertical-align: middle;
+    width: 98%;
+}
+
+#input_pannel {
+    background: rgb(255,255,255);
+}
+
+#send_text {
+    position: relative;
+    display: inline-block;
+    outline: none;
+    border: none;
+    width: 76%;
+    vertical-align: middle;
+    padding: 3px 3px 3px 3px;
+}
+
+#insert_smile {
+    position: relative;
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    vertical-align: middle;
+}
+
+#save_text_btn {
+    position: relative;
+    display: inline-block;
+    float: right;
+    vertical-align: middle;
+    float: right;
+    clear: right;
+}
+
+#send_img {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    content: url('Send.png');
+    margin: 1px 1px 1px 1px;
+    vertical-align: middle;
+}
+
+#preset_name_pannel {
+    min-width: 400px;
+    width: 98%;
+    margin:0 auto;
+    margin-top: 5px;
+    text-align: center;
+}
+
+#preset_name {
+    display: inline-block;
+    width: 80%;
+    margin: 5px 5px 5px 5px;
+    outline: none;
+    border: none;
+    padding: 3px 3px 3px 3px;
+    text-align: center;
+}
+
+#confirm_img {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    content: url('Confirm.png');
+    margin: 1px 1px 1px 1px;
+    vertical-align: middle;
+}
+
+#editor_smileys {
+    display: inline-block;
+}
+
+#operator {
+    background: rgb(217, 245, 187);
+}
+
+.btn-smile {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+}
+
+#help {
+    position: absolute;
+    content: attr(data-title);
+    z-index: 1;
+    background: rgba(255,255,230,0.85);
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    padding: 5px 5px 5px 5px;
+    margin: 15px 15px 15px 15px;
+    border: 1px solid rgb(0, 255, 0);
+    border-radius: 5px;
+}
+
+.btn-smile:hover::after {
+    background-color: rgba(0, 255, 0, 0.2);
+    border: 1px solid rgba(0, 255, 0, 0.75);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-smile:active {
+    background-color: rgba(0, 0, 255, 0.1);
+    border: 2px solid rgba(0, 0, 255, 0.75);
+    border-radius: 5px;
+}
+
+.cmd_color {
+    position: relative;
+    display: inline-block;
+    color: #91ff00;
+    margin: 3px 3px 3px 3px;
+    vertical-align: middle;
+}
+
+.cmd_color_d {
+    position: relative;
+    display: inline-block;
+    color: #4e8900;
+    margin: 3px 3px 3px 3px;
+    vertical-align: middle;
+}
+
+.msg_color {
+    position: relative;
+    display: inline-block;
+    color: #d5f5ff;
+    margin: 3px 3px 3px 3px;
+    vertical-align: middle;
+}
+
+.msg_color_d {
+    position: relative;
+    display: inline-block;
+    color: #1022ff;
+    margin: 3px 3px 3px 3px;
+    vertical-align: middle;
+}
+
+.robot_text_color {
+    color: #1022ff;
+    position: relative;
+    margin: 3px 3px 3px 3px;
+    display: block;
+    float: left;
+    clear: left;
+}
+
+.bot_text_color {
+    color: #c96807;
+    position: relative;
+    margin: 3px 3px 3px 3px;
+    display: block;
+    float: left;
+    clear: left;
+}
+
+.operator_text_color {
+    color: #4e8900;
+    position: relative;
+    margin: 3px 3px 3px 3px;
+    display: block;
+    float: left;
+    clear: left;
+}

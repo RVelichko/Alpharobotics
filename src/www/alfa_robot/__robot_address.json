@@ -1,0 +1,20 @@
+{
+    "name": "КИКИ test",
+    "room_id":"KIKI-test",
+    "robot_move_url":"http://10.0.31.21/arpanel/keypad2mbr.php",
+    "automat_url":"https://localhost:38828/KIKI-31000/automat",
+    "spell_url":"http://10.0.31.22:8787",
+    "gesticulation_url":"http://10.0.31.21/arpanel/play.php",
+    "robots_server_url":"ws://localhost:20001/rest/robot",
+    "json_save_url": "ws://localhost:20000/rest/saver",
+    "presets_save_path": "alfa_operator/presets.json",
+    "settings_save_path": "alfa_operator/settings.json",
+    "presets_url": "http://localhost:63342/alfa_operator/presets.json",
+    "settings_url": "http://localhost:63342/alfa_operator/settings.json",
+    "smiles_url": "http://localhost:63342/alfa_operator/smiles.json",
+    "multimedia_url": "http://localhost:63342/alfa_operator/media/media.json",
+    "multimedia_files_url": "http://localhost:63342/alfa_operator/media/",
+    "wifi_url": "ws://10.0.31.31:20002/rest/wifi",
+    "wifi_login": "root",
+    "wifi_pswd": "ARnet9308"
+}

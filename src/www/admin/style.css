@@ -1,0 +1,448 @@
+#editor {
+    background: rgb(217, 245, 187);
+}
+
+
+.border {
+    border: 1px solid rgb(0, 200, 0); /* Параметры рамки */
+    border-radius: 5px;
+    margin: 5px 1% 5px 1%;
+}
+
+.border_2 {
+    border: 1px solid rgb(0, 200, 0); /* Параметры рамки */
+    border-radius: 5px;
+    margin: 5px 0px 5px 0px;
+}
+
+.row {
+    display: table;
+    height: 100%;
+    width: 98%;
+}
+
+.column {
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+}
+
+
+#pannel {
+    width: 100%;
+    /*border: 1px solid rgb(0, 200, 0); /!* Параметры рамки *!/*/
+    /*border-radius: 5px;*/
+    margin: 5px 0px 0px 0px;
+}
+
+#settings_pannel {
+    display: inline-block;
+    width: 64%;
+    margin: 0px 0px 5px 1%;
+    float: left;
+}
+
+#log_pannel {
+    display: inline-block;
+    width: 33%;
+    margin: 5px 0px 5px 1%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background: rgb(255,255,255);
+}
+
+#name_pannel {
+    width: 98%;
+    margin: 5px 1% 0px 1%;
+    text-align: center;
+    background: rgb(255,255,255);
+}
+
+#robot_name {
+    position: relative;
+    width: 98%;
+    margin: 5px 5px 5px 5px;
+    vertical-align: middle;
+    border: none;
+    text-align: center;
+}
+
+#robot_selector {
+    position: relative;
+    width: 15%;
+    margin: 5px 5px 5px 5px;
+    vertical-align: middle;
+}
+
+#misunderstand_perc_pannel {
+    width: 100%;
+    align-content: center;
+    vertical-align: middle;
+    background: rgb(255,255,255);
+}
+
+#misunderstand_perc {
+    width: 40%;
+    margin: 5px 5px 5px 3%;
+    border: none;
+    color: #0f1099;
+}
+
+#misunderstand_perc_number {
+    width: 50px;
+    margin: 5px 5px 5px 5px;
+    text-align: center;
+    color: #0f1099;
+}
+
+#misunderstand_perc_type {
+    width: 70px;
+    margin: 5px 5px 5px 5px;
+    text-align: center;
+    border: none;
+    color: #0f1099;
+}
+
+#misunderstand_perc_btn {
+    display: inline;
+    width: 140px;
+}
+
+
+#misunderstand_pannel {
+    width: 100%;
+    align-content: center;
+    vertical-align: middle;
+    background: rgb(255,255,255);
+}
+
+#misunderstand {
+    display: inline;
+    width: 73%;
+    margin-left: 3%;
+}
+
+#misunderstand_btn {
+    display: inline;
+    width: 140px;
+}
+
+#alarm_clock_pannel {
+    width: 100%;
+    align-content: center;
+    vertical-align: middle;
+    background: rgb(255,255,255);
+}
+
+#alarm_clock {
+    display: inline;
+    width: 73%;
+    margin-left: 3%;
+}
+
+#alarm_clock_btn {
+    display: inline;
+    width: 140px;
+}
+
+
+#timeout_pannel {
+    width: 100%;
+    align-content: center;
+    vertical-align: middle;
+    background: rgb(255,255,255);
+}
+
+#timeout {
+    width: 40%;
+    margin: 5px 5px 5px 3%;
+    border: none;
+    color: #0f1099;
+}
+
+#timeout_number {
+    width: 50px;
+    margin: 5px 5px 5px 5px;
+    text-align: center;
+    color: #0f1099;
+}
+
+#timeout_type {
+    width: 50px;
+    margin: 5px 5px 5px 5px;
+    text-align: center;
+    border: none;
+    color: #0f1099;
+}
+
+#timeout_btn {
+    display: inline;
+    width: 140px;
+}
+
+#spell_timeout_pannel {
+    width: 100%;
+    align-content: center;
+    vertical-align: middle;
+    background: rgb(255,255,255);
+}
+
+#spell_timeout {
+    width: 40%;
+    margin: 5px 5px 5px 3%;
+    border: none;
+    color: #0f1099;
+}
+
+#spell_timeout_number {
+    width: 50px;
+    margin: 5px 5px 5px 5px;
+    text-align: center;
+    color: #0f1099;
+}
+
+#spell_timeout_type {
+    width: 50px;
+    margin: 5px 5px 5px 5px;
+    text-align: center;
+    border: none;
+    color: #0f1099;
+}
+
+#spell_timeout_btn {
+    display: inline;
+    width: 140px;
+}
+
+#regexes_input {
+    text-align: center;
+}
+
+.robot_text_color {
+    color: #1022ff;
+    position: relative;
+    margin: 3px 3px 3px 3px;
+    display: block;
+    float: left;
+    clear: left;
+}
+
+.bot_text_color {
+    color: #c96807;
+    position: relative;
+    margin: 3px 3px 3px 3px;
+    display: block;
+    float: left;
+    clear: left;
+}
+
+.operator_text_color {
+    color: #4e8900;
+    position: relative;
+    margin: 3px 3px 3px 3px;
+    display: block;
+    float: left;
+    clear: left;
+}
+
+.image {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin: 1px 1px 1px 1px;
+    vertical-align: middle;
+}
+
+.right {
+    margin: 5px 5px 5px 5px;
+    float: right;
+    clear: right;
+}
+
+
+.list_img {
+    content: url('List.png');
+}
+
+.add_img {
+    content: url('Add.png');
+}
+
+.save_img {
+    content: url('Save.png');
+}
+
+.del_img {
+    content: url('Delete.png');
+}
+
+.cancel_img {
+    content: url('Cancel.png');
+}
+
+.confirm_img {
+    content: url('Confirm.png');
+}
+
+.input_readonly {
+    width: 60%;
+    margin: 5px 5px 5px 5px;
+    background: rgba(255,255,230,0.95);
+    border: none;
+    color: #0f1099;
+    /*text-align: center;*/
+}
+
+.show_input_readonly {
+    text-align: center;
+}
+
+.add_input_readonly {
+    width: 90%;
+    border: none;
+    margin: 5px 5px 5px 5px;
+    background: rgba(255,255,230,0.95);
+    color: #e0900f;
+    text-align: center;
+}
+
+.input_edit {
+    margin: 5px 5px 5px 5px;
+    width: 65%;
+    color: #0f1099;
+}
+
+.alarm_clock_input_edit {
+    margin: 5px 5px 5px 5px;
+    width: 5%;
+    text-align: center;
+    color: #0f1099;
+}
+
+.alarm_str_input_edit {
+    margin: 5px 5px 5px 5px;
+    width: 60%;
+    color: #0f1099;
+}
+
+#regexes_pannel {
+    text-align: center;
+    background: rgb(255,255,255);
+}
+
+#input_text {
+    margin: 15px 5px 15px 15px;
+    vertical-align: middle;
+}
+
+.readonly_pannel {
+    position: absolute;
+    width: 98%;
+    height: 98%;
+    text-align: center;
+    vertical-align: middle;
+    background: rgba(0,255,0,0.1);
+    border: 1px solid rgb(0, 255, 0);
+    border-radius: 5px;
+    left: 1%;
+    top: 1%;
+}
+
+#readonly_child_pannel {
+    z-index: 100;
+}
+
+#add_str_show_pannel {
+    z-index: 101;
+}
+
+#add_mis_show_pannel {
+    z-index: 101;
+}
+
+#add_mis_perc_show_pannel {
+    z-index: 101;
+}
+
+#add_timeout_show_pannel {
+    z-index: 101;
+}
+
+#add_spell_timeout_show_pannel {
+    z-index: 101;
+}
+
+#add_alarm_show_pannel {
+    z-index: 101;
+}
+
+.show_pannel {
+    position: absolute;
+    width: 60%;
+    padding: 20px 20px 20px 20px;
+    text-align: center;
+    vertical-align: middle;
+    background: rgba(255,255,230,0.95);
+    border: 1px solid rgb(0, 255, 0);
+    border-radius: 5px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.new_object {
+    text-align: center;
+    margin: 5px 5px 5px 5px;
+}
+
+.new_alarm_clock {
+    width: 5%;
+}
+
+.new_alarm_msg {
+    width: 70%;
+}
+
+.new_regex {
+    width: 45%;
+}
+
+.new_resp {
+    width: 45%;
+}
+
+.new_str {
+    width: 90%;
+}
+
+.add_show_input {
+    margin: 5px 5px 5px 5px;
+    padding: 5px 5px 5px 5px;
+}
+
+.delete_confirm {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    padding: 20px 20px 20px 20px;
+    text-align: center;
+    vertical-align: middle;
+    background: rgba(255,255,230,0.95);
+    border: 1px solid rgb(0, 200, 0); /* Параметры рамки */
+    border-radius: 5px;
+    z-index: 100;
+}
+
+#help {
+    position: absolute;
+    content: attr(data-title);
+    z-index: 1;
+    background: rgba(255,255,230,0.85);
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    padding: 5px 5px 5px 5px;
+    margin: 15px 15px 15px 15px;
+    border: 1px solid rgb(0, 255, 0);
+    border-radius: 5px;
+}

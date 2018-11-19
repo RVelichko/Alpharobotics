@@ -1,0 +1,81 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Определение типа товара по картинке</title>
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel='stylesheet' href='css/font-roboto.css' type='text/css'>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="js/fancybox/jquery.fancybox.css">-->
+    <script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!--<script type="text/javascript" src="js/fancybox/jquery.fancybox.js"></script>-->
+</head>
+<body>
+<div style="height:100%">
+    <h2>Add Food Products</h2>
+    <div class="col">
+        <label><input type="radio" checked="checked" onchange="setCategory(this);" value="PACKED" name="dva"/>Категория Фасованный</label>
+    </div>
+    <div class="col">
+        <label><input type="radio" onchange="setCategory(this);" value="WEIGHT_OUT" name="dva"/>Категория Развесной</label>
+    </div>
+    <input type="file" id="upload_files" required="required" multiple onchange="sendMediaFiles()"/>
+    <div id="result"></div>
+</div>
+<script>
+    window.category = 'PACKED';
+    function setCategory(input) {
+        window.category = input.value;
+    }
+
+    //window.classifi_url = "ws://185.58.205.67:40000/rest/classifi";
+    window.classifi_url = "ws://localhost:40000/rest/classifi";
+
+    function sendMediaFiles() {
+        var files = document.getElementById('upload_files').files;
+        var arr_ws = new Array(files.length);
+        console.log('files len = ' + files.length);
+        for(var i = 0; i < files.length; ++i) {
+            arr_ws[i] = new WebSocket(window.classifi_url);
+            arr_ws[i].binaryType = "arraybuffer";
+            arr_ws[i].onmessage = function (msg) {
+                var result_json = JSON.parse(msg.data);
+                var json_str = JSON.stringify(result_json);
+                console.log(json_str);
+                $('#result').text(json_str);
+            };
+            arr_ws[i].onclose = function() {
+                console.log("Connection is closed...");
+            };
+            arr_ws[i].onerror = function(e) {
+                $('#result').text('ERROR: ' + e.msg);
+            };
+            arr_ws[i].send_id = i;
+            arr_ws[i].onopen = function() {
+                console.log("Connected.");
+                var file = files[this.send_id];
+                var send_reader = new FileReader();
+                var ws = this;
+                send_reader.onload = function(snd) {
+                    var raw_data = new ArrayBuffer();
+                    raw_data = snd.target.result;
+                    var send_json = {
+                        name:file.name,
+                        category: window.category,
+                        size:raw_data.byteLength
+                    };
+                    // Отправить описание
+                    console.log('Try add "' + JSON.stringify(send_json) + '"');
+                    ws.send(JSON.stringify(send_json));
+                    // Отправить содержимое файла
+                    ws.send(raw_data);
+                    console.log('File "' + file.name + '" has been transferred.');
+                };
+                send_reader.readAsArrayBuffer(file);
+            };
+        }
+    }
+</script>
+</body>
+</html>

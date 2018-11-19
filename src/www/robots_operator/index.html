@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+	<head>
+		<meta charset="utf-8">
+		<title>Оператор роботов</title>
+		<link rel="stylesheet" href="style.css">
+		<script src="utils.js"></script>
+	</head>
+	<body>
+		<div class="row border">
+			<div id="name_pannel" class="border">
+				<input id="robot_name" type="text" placeholder="Роботы не доступны для подключения" readonly>
+				<select id="robot_selector" onchange="onSelected(this.value)"></select>
+			</div>
+			<div id="responce_pannel" class="border">
+				<input id="robot_responce" type="text" placeholder="введите ответ">
+				<button id="send_text_btn">
+					<div id="send_img"></div> Ответить
+				</button>
+			</div>
+			<div id="log_pannel" class="border"></div>
+		</div>
+
+		<script>
+		var _config;
+		var _websock;
+		var _log_pannel = document.getElementById("log_pannel");
+		var _input = document.getElementById("robot_responce");
+
+		_input.addEventListener("keypress", function(e) {
+			var key = e.which || e.keyCode;
+			if (key === 13) {
+				console.log(_input.value);
+				sendMessage(_input.value);
+				_input.value = "";
+			}
+		});
+
+		document.getElementById("send_text_btn").addEventListener("click", function () {
+			console.log(_input.value);
+			sendMessage(_input.value);
+			_input.value = "";
+		});
+
+		function sendMessage(msg) {
+			var log_msg = document.createElement("DIV");
+			log_msg.setAttribute("class", "operator_text_color");
+			var now = new Date();
+			log_msg.innerHTML = now.toISOString() + " - " + _config.operator_name + ": \"" + msg + "\"";
+			_log_pannel.appendChild(log_msg);
+
+			var oper_msg = {
+				operator: _config.operator_name,
+				text: msg
+			};
+			_websock.send(JSON.stringify(oper_msg));
+			console.log(JSON.stringify(oper_msg));
+		}
+
+		function recvRobotText(evt) {
+			console.log("recv: " + evt.data);
+			var json = JSON.parse(evt.data);
+			if ('text' in json) {
+				var log_msg = document.createElement("DIV");
+				log_msg.setAttribute("class", "robot_text_color");
+				var now = new Date();
+				log_msg.innerHTML = now.toISOString() + " - " + json.robot + ": \"" + json.text + "\"";
+				_log_pannel.appendChild(log_msg);
+			}
+
+			if ('resp' in json) {
+				var log_msg = document.createElement("DIV");
+				log_msg.setAttribute("class", "bot_text_color");
+				var now = new Date();
+				log_msg.innerHTML = now.toISOString() + " - " + json.robot + ": \"" + json.resp + "\"<br>";
+				_log_pannel.appendChild(log_msg);
+			}
+		}
+
+		function recvRobots(evt) {
+			console.log("recv: " + evt.data);
+			var rjson = JSON.parse(evt.data);
+
+			if (rjson == null) {
+				console.log("not robots");
+				return;
+			}
+			var selector = document.getElementById("robot_selector");
+			for(var index in rjson) {
+				console.log(index + ": " + rjson[index]);
+				var option = document.createElement("OPTION");
+				selector.appendChild(option);
+				option.innerHTML = rjson[index];
+			}
+
+			_websock.onmessage = function(e) { recvRobotText(e); };
+			if (rjson.length) {
+				onSelected(rjson[0]);
+				//document.getElementById("robot_name").value = 'Обслуживается робот: "' + rjson[0] + '"';
+			}
+		}
+
+		window.onload = function () {
+			UTILS.LoadJSON("operator_stt_config.json", function(response) {
+				_config = JSON.parse(response);
+
+				var state;
+				// Подключиться к серверу опереторов
+				_websock = new WebSocket(_config.operator_server_url);
+
+				_websock.onopen = function (evt) {
+					var now = new Date();
+					var connect = {
+						operator: _config.operator_name,
+						date: now.toISOString()
+					};
+					_websock.onmessage = function(e) { recvRobots(e); };
+					_websock.send(JSON.stringify(connect));
+					console.log("send " + JSON.stringify(connect));
+				};
+			});
+		};
+
+		window.onclose = function() {
+			_websock.close();
+		};
+
+		function onSelected(id) {
+			var get_robot = {
+				operator: _config.operator_name,
+				cmd: "get",
+				robot: id
+			};
+			_websock.send(JSON.stringify(get_robot));
+			console.log("set: " + id);
+			document.getElementById("robot_name").value = 'Обслуживается робот: "' + id + '"';
+		}
+		</script>
+	</body>
+</html>
+
+

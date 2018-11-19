@@ -1,0 +1,62 @@
+[
+    {
+        "cmd": "/cmd 01",
+        "cmd_smile": "smiles/robot_1.png"
+    },
+    {
+        "cmd": "/cmd 02",
+        "cmd_smile": "smiles/robot_2.png"
+    },
+    {
+        "cmd": "/cmd 03",
+        "cmd_smile": "smiles/robot_3.png"
+    },
+    {
+        "cmd": "/cmd 04",
+        "cmd_smile": "smiles/robot_4.png"
+    },
+    {
+        "cmd": "/cmd 05",
+        "cmd_smile": "smiles/robot_5.png"
+    },
+    {
+        "cmd": "/cmd 06",
+        "cmd_smile": "smiles/robot_6.png"
+    },
+    {
+        "cmd": "/cmd 07",
+        "cmd_smile": "smiles/robot_7.png"
+    },
+    {
+        "cmd": "/cmd 08",
+        "cmd_smile": "smiles/smile01.png"
+    },
+    {
+        "cmd": "/cmd 09",
+        "cmd_smile": "smiles/smile02.png"
+    },
+    {
+        "cmd": "/cmd 10",
+        "cmd_smile": "smiles/smile03.png"
+    },
+    {
+        "cmd": "/cmd 11",
+        "cmd_smile": "smiles/smile04.png"
+    },
+    {
+        "cmd": "/cmd 12",
+        "cmd_smile": "smiles/smile05.png"
+    },
+    {
+        "cmd": "/cmd 13",
+        "cmd_smile": "smiles/smile06.png"
+    },
+    {
+        "cmd": "/cmd 14",
+        "cmd_smile": "smiles/smile07.png"
+    },
+    {
+        "cmd": "/cmd 15",
+        "cmd_smile": "smiles/smile08.png"
+    }
+]

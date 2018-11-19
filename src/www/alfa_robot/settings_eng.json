@@ -1,0 +1,168 @@
+{
+  "lang":"en-US",
+  "responces":{
+    "misunderstand_perc":{
+      "perc":70,
+      "resp":[
+	  "please, repeat"
+        ]
+    },
+    "misunderstand": {
+      "msg":[
+	  "Not correct, answer, sorry"
+        ]
+    },
+    "spell_timeout":{
+      "time":"10",
+      "msg":[
+	  "You are talked very more information, please wait"
+        ]
+    },
+    "timeout":{
+      "sleep":"15",
+      "msg":[
+	  "Hello", "please, come to me"
+        ]
+    },
+    "alarm_clocks":{
+      "clocks":[
+        {"hours":"11","minutes":"57","repeat":"90","msg":"Alarm clock 11 57, repeat 90 seconds","pic":""},
+        {"hours":"12","minutes":"17","repeat":"60","msg":"","pic":"https://185.58.205.67/alfa_operator/media/1447876238_kiki_03.jpg"}
+      ]
+    },
+    "regexes":[
+      {
+        "regex":"hello",
+        "resp":[
+		"Hi, my name is Kiki, whats your name"
+        ]
+      },
+      {
+        "regex":"how are you",
+        "resp":[
+          "I am fine, thanks, and how are you"
+        ]
+      },
+      {
+        "regex":"what is your name",
+        "resp":[
+		  "My name is Kiki, what is your name"
+        ]
+      },
+      {
+        "regex":"who are you",
+        "resp":[
+		  "I am robot-poromoter, and you ?"
+        ]
+      },
+      {
+        "regex":"what you can",
+        "resp":[
+		  "I am able to do anything only you need to teach me"
+        ]
+      },
+      {
+        "regex":"tell me about your company",
+        "resp":[
+          "My company is AlfaRobotics. It is biggest robotics company in Russia"
+        ]
+      },
+      {
+        "regex":"what is your price",
+        "resp":[
+          "12 thousands dollars"
+		  ]
+      },
+      {
+        "regex":"who is",
+        "resp":[
+		"WOOPS! was founded in the winter of 2012 in order to bring the JOY of French macarons to Americans. Our first pop­up shop was in the Mannual Holiday Market at Bryant- Park,New-York. We then expanded to 15 boutique locations across New York State, New Jersey, and Connecticut. A location at Port Authority Bus Terminal, NYC, and a full service cafe in Williamsburg, Brooklyn.  We also sell nationwide via our website, 3w, by whoops.com"
+          ]
+      },
+      {
+        "regex": "what is macarons",
+        "resp":[
+		"  A macaron is a French pastry made of two almond meringue shells that sandwich different flavored ganaches  or jam fillings. Macarons are renown for their large variety of true­to­life flavors"
+        ]
+      },
+      {
+        "regex":"what is ganache",
+        "resp":[
+          "Ganache is a filling made by mixing cream and white or dark chocolate together, and infusing it with flavor"
+        ]
+      },
+      {
+        "regex":"what make a good macaron",
+        "resp":[
+		"The outer macaron shells should be crisp and gently crack in your mouth? the filling should be soft and creamy with a burst of flavor"
+          ]
+      },
+      {
+        "regex":"what is the difference between a macaron versus macaroon",
+        "resp":[
+		  "A macaron ­­ with one ‘o’ and pronounced mah­kah­ROHN ­­ is the French Pastry that you see here?  a macaroon ­­ with two ‘o’s and pronounced mak­kah­ROON ­­ is a chewy cookie made from flaked coconut"
+        ]
+      },
+      {
+        "regex":"Do you offer samples",
+        "resp":[
+		"We  currently  do  not  offer  samples,  but  I’m  sure  that  after  you  purchase  just  one,  you’ll become a fan"
+          ]
+      },
+      {
+        "regex": "how are the macarons made",
+        "resp":[
+		"Macarons are hand made. The shells are made of almond flour, sugar and egg whites and each filling has its own unique recipe. It's a complicated process that is highly sensitive to many factors including whisking speed, humidity, and temperature"
+          ]
+      },
+      {
+        "regex":"Where are the macarons made",
+        "resp":[
+		" Our macarons are baked in our own bakery in New York City"
+          ]
+      },
+      {
+        "regex":"when where the macarons baked",
+        "resp":[
+		"  We  receive  deliveries  multiple  times  a  week  and  keep  the  macarons  cool  to  ensure  the utmost quality. Macarons are not meant to be eaten right out of the oven. An important part of their  baking  process  actually  involves  intense  freezing  to  protect  it  from  humidity  and  to maintain its proper consistency. They are best served at cool room temperature"
+          ]
+      },
+        {
+        "regex":"what ingredients are used in our macarons",
+        "resp":[
+		"The outer shells are made from almond flour, egg whites, and sugar. The ganache fillings are made with cream and chocolate infused with a variety of flavors"
+          ]
+      },
+      {
+        "regex":"i am fine",
+        "resp":[
+		"good"	
+          ]
+      },
+      {
+        "regex":"i love you",
+        "resp":[
+		"i'm love your too"
+          ]
+      },
+      {
+        "regex":"do you love me",
+        "resp":[
+		"of course"
+         ]
+      },
+      {
+        "regex": "how old are you",
+        "resp":[
+		"girls are not well ask such questions, sorry"
+         ]
+      },
+      {
+        "regex": "contemporary music",
+        "resp":[
+          "Like bricks falling on my head!"
+        ]
+      }
+    ]
+  }
+}

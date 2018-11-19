@@ -1,0 +1,7 @@
+{
+    "robot_name": "test-robot-001",
+    "room_id": "test-room-001",
+    "rooms_server_url": "ws://localhost:8087/rest/robot",
+    "spell_url": "https://cloud.alexrobotics.ru:48828",
+    "robot_config_url": "http://127.0.0.1:5500/robot_stt_config.json"
+}

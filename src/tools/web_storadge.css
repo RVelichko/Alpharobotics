@@ -1,0 +1,93 @@
+body, html {
+    font-family:arial,sans-serif;
+    font-size:1em;
+    height: 100%;
+    width: 100%;
+    margin: 0px; padding: 0px; border: none;
+    overflow: scroll;
+}
+
+.storadge_pannel {
+    border: 1px solid rgb(0, 200, 0);
+    border-radius: 5px;
+    margin: 5px 1% 5px 1%;
+    background: rgb(217, 245, 187);
+}
+
+.media_line_pannel {
+    height: auto;
+    border: 1px solid rgb(0, 200, 0);
+    border-radius: 5px;
+    padding: 3px 3px 3px 3px;
+    margin: 1px 5px 1px 5px;
+    background: rgb(255,255,255);
+    vertical-align: middle;
+}
+
+.upload_pannel {
+    border: 1px solid rgb(0, 200, 0);
+    border-radius: 5px;
+    padding: 3px 3px 3px 3px;
+    margin: 1px 5px 1px 5px;
+    background: rgb(255,255,255);
+    vertical-align: middle;
+    text-align: center;
+}
+
+
+.confirm_dialog {
+    max-width: 80%;
+    max-height: 80%;
+    min-width: 20%;
+    min-height: 20%;
+    border: 1px solid rgb(0, 200, 0);
+    border-radius: 5px;
+    padding: 5px 5px 5px 5px;
+    margin: 5px 5px 5px 5px;
+    background: rgb(255,255,255);
+    vertical-align: middle;
+    text-align: center;
+}
+
+.mm_show {
+    max-width: 90%;
+    max-height: 90%;
+    min-width: 40%;
+    min-height: 40%;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.del_button {
+    background: rgb(255,172,172);
+}
+
+.cancel_button {
+    background: rgb(255,204,128);
+}
+
+.confirm_button {
+    background: rgb(23,190,23);
+}
+
+.show:hover {
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 5px;
+    padding: 3px 3px 3px 3px;
+    vertical-align: middle;
+}
+
+.show:hover {
+    border: 1px solid rgb(0, 200, 0);
+    border-radius: 5px;
+    padding: 3px 3px 3px 3px;
+    vertical-align: middle;
+}
+
+.show:active {
+    background: rgb(23,190,23);
+    border: 1px solid rgb(0, 200, 0);
+    border-radius: 5px;
+    padding: 3px 3px 3px 3px;
+    vertical-align: middle;
+}

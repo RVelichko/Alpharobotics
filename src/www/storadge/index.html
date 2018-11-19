@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+		<title>Play buttons</title>
+		<link rel="stylesheet" href="styles.css">
+	</head>
+	<body>
+		<div id="status"></div>
+		<table id="table">
+			<tr>
+				<td>NUM</td>
+				<td>FILE</td>
+				<td>BUTTON</td>
+			</tr>
+		</table>
+		<button id="load_btn">Загрузить файл</button>
+		<input id="userfile" type="file" name="userfile" style='position:absolute;visibility:hidden;'/>
+		<div id="progress"></div>
+		<script>
+			function sendGetRequest(url, callback) {
+				var req = new XMLHttpRequest();
+				req.open("GET", url, true);
+				req.onreadystatechange = function(){
+					callback(req);
+				};
+				req.send(null);
+			}
+
+			function addRow(index, text) {
+				var table = document.getElementById("table");
+				var rowCount = table.rows.length;
+				var row = table.insertRow(rowCount);
+				row.insertCell(0).innerHTML = index;
+				row.insertCell(1).innerHTML = text;
+				row.insertCell(2).innerHTML = '<button id=btn_'+index+'>Delete</button>';
+				var btn = document.getElementById("btn_" + index).addEventListener("click", function() {
+					console.log("Delete \"" + text + "\"");
+					sendGetRequest("http://10.0.0.7/delete.php?file=" + text, function(req) {
+						if (req.readyState == 4) {
+							console.log(req.status + ': ' + req.statusText);
+							document.getElementById("status").innerHTML = "delete \"" + text + "\": " + req.status + ': ' + req.statusText;
+						}
+					});
+				}, false);
+			}
+
+			function updateFilesInfo() {
+				sendGetRequest("http://10.0.0.7/files.php", function (req) {
+					if (req.readyState == 4) {
+						console.log(req.status + ': ' + req.statusText);
+						document.getElementById("status").innerHTML = req.status + ': ' + req.statusText;
+						if (req.status === 200) {
+							var arr = req.responseText.split("\n");
+							var index = 0;
+							arr.forEach(function (item, i) {
+								if (item.indexOf(".txt") != -1 ||
+										item.indexOf(".bvm") != -1 ||
+										item.indexOf(".wav") != -1) {
+									addRow(index, item);
+									console.log("arr[" + i + "]=" + item);
+									index++;
+								}
+							});
+						}
+					}
+				});
+			}
+			updateFilesInfo();
+
+			var load_btn = document.getElementById('load_btn');
+			load_btn.addEventListener('click', function(e) {
+				var input_file = document.getElementById('userfile');
+				input_file.addEventListener("change", function(e) {
+					var files = this.files;
+					var file = files[0];
+					if (file) {
+						var req = new XMLHttpRequest();
+						req.open("POST", "http://10.0.0.7/upload.php", true);
+						req.upload.onprogress = function(event) {
+							console.log(event.loaded + ' / ' + event.total);
+							document.getElementById("progress").innerHTML = event.loaded + ' / ' + event.total;
+						};
+						req.onerror = req.onload = function() {
+							var table = document.getElementById("table");
+							var rowCount = table.rows.length;
+							for (i = 1; i < rowCount; ++i) {
+								table.deleteRow(1);
+							}
+							updateFilesInfo();
+							console.log(req.status + ': ' + req.statusText + ' [' + req.responseText + ']');
+							document.getElementById("progress").innerHTML =
+								"Upload \"" + file.name + "\": " + req.status + ': ' + req.statusText + ' [' + req.responseText + ']';
+						};
+						var formData = new FormData();
+						formData.append("userfile", file);
+						req.send(file);
+					}
+				}, false);
+				input_file.click();
+			}, false);
+		</script>
+	</body>
+</html>

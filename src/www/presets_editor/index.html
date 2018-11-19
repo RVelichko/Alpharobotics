@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+		<title>Редактор команд</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<link rel="stylesheet" href="bootstrap.min.css">
+		<link rel="stylesheet" href="bootstrap-theme.min.css">
+		<link rel="stylesheet" href="style.css">
+		<script src="utils.js"></script>
+	</head>
+	<body>
+		<div id="editor" class="border">
+			<div id="input_pannel" class="border">
+				<din id="preset_name_pannel">
+					<input id="preset_name" type="text" placeholder="название пресета" name="comsequence">
+					<button id="delete_text_btn" class="btn btn-warning btn-sm" style="background: red">
+						<div id="delete_img"></div> Удалить
+					</button>
+				</din>
+				<div id="input_text">
+					<input id="send_text" type="text" placeholder="сообщение" name="comsequence">
+					<div id="insert_smile"></div>
+					<button id="save_text_btn" class="btn btn-warning btn-sm">
+						<div id="save_img"></div> Сохранить
+					</button>
+				</div>
+			</div>
+
+			<div id="buttons_log">
+				<div id="buttons_pannel">
+					<div id="smiles_pannel" class="border">
+						<div id="selected_smile"></div>
+						<div id="smiles"></div>
+					</div>
+					<div id="presets" class="border"></div>
+				</div>
+
+				<div id="log_pannel" class="border"></div>
+			</div>
+		</div>
+
+		<div id="help" hidden></div>
+
+		<div id="readonly_pannel" class="readonly_pannel" hidden>
+		</div>
+
+		<div id="delete_confirm" hidden>
+			<div id="delete_name">< название пресета ></div>
+			<button id="cancel_delete_btn" class="btn btn-warning btn-sm" style="background: green">
+				<div id="cancel_img"></div> Отменить
+			</button>
+			<button id="confirm_delete_btn" class="btn btn-warning btn-sm" style="background: red">
+				<div id="confirm_img"></div> Подтвердить
+			</button>
+		</div>
+
+		<script src="main.js"></script>
+	</body>
+</html>

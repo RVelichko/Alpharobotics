@@ -1,0 +1,17 @@
+{
+    "name":"KIKI-test",
+    "room_id":"KIKI-test",
+    "automat_url":"https://localhost:20000",
+    "operator_url": "https://localhost:38828/KIKI-test/operator",
+    "robots_server_url":"ws://localhost:20001/rest/operator",
+    "json_save_url": "ws://localhost:20000/rest/saver",
+    "presets_save_path": "alfa_operator/presets.json",
+    "settings_save_path": "alfa_operator/settings.json",
+    "presets_url": "http://localhost:63342/alfa_operator/presets.json",
+    "settings_url": "http://localhost:63342/alfa_operator/settings.json",
+    "smiles_url": "http://localhost:63342/alfa_operator/smiles.json",
+    "multimedia_save_path": "alfa_operator/media/",
+    "multimedia_rest_url": "ws://localhost:20000",
+    "multimedia_list_url": "http://localhost:63342/alfa_operator/media/media.json",
+    "multimedia_files_url": "http://localhost:63342/alfa_operator/media/"
+}

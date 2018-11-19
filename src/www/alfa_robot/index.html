@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+        <title>Администратор</title>
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta http-equiv="Pragma" content="no-cache" />
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <link rel='stylesheet' href='css/font-roboto.css' type='text/css'>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="js/fancybox/jquery.fancybox.css">
+        <link rel="stylesheet" href="css/new-style.css">
+        <link rel="stylesheet" href="css/kiki-style.css">
+        <script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/fancybox/jquery.fancybox.js"></script>
+        <script type="text/javascript" src="js/utils.js"></script>
+        <script type="text/javascript" src="js/room_service.js"></script>
+        <script type="text/javascript" src="js/wifi.js"></script>
+        <script type="text/javascript" src="js/alarms.js"></script>
+        <script type="text/javascript" src="js/kiki.js"></script>
+        <script type="text/javascript" src="js/socket.io.js"></script>
+    </head>
+    <body id="fullscreen">
+        <iframe id="iframe_automat" hidden></iframe>
+
+        <div class="kiki-admin-panel-wrapper">
+            <div class="kiki-admin-panel page-media">
+                <div class="pictures"></div>
+            </div>
+            <div class="kiki-admin-panel page-admin">
+                <div class="presentation">
+                    <div id="presentation-iframe" class="fancybox-iframe">
+                        <video width="100%" height="100%" controls="" autoplay="" name="media">
+                            <source src="1.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="close" onClick="$(this).parent().hide(); $(this).parent().find('iframe').attr('src', '');"><i class="fa fa-times"></i></div>
+                </div>
+                <div class="kiki-header">
+                    <a href=".page-admin" class="title pull-left local-link">Робот KIKI</a>
+                    <div class="mic pull-left"></div>
+                    <a href=".page-admin" class="logo local-link pull-right"></a>
+                </div>
+                <div class="kiki-buttons">
+                    <a href=".page-wifi-scan" class="local-link pull-left col-xs-4"><button class="btn-kiki-default btn-1"><span>Подключиться <br>к WiFi</span></button></a>
+                    <a href=".page-alarms" class="local-link pull-left col-xs-4"><button class="btn-kiki-default btn-3"><span>Локальное <br>управление</span></button></a>
+                    <a href=".page-voice" class="local-link pull-left col-xs-4"><button class="btn-kiki-default btn-4"><span>Голосовые <br>команды</span></button></a>
+                    <a href=".page-media" class="local-link pull-left col-xs-6"><button class="btn-kiki-default btn-2"><span>Показ <br>контента</span></button></a>
+                    <!--<a href=".page-animation" class="local-link pull-left col-xs-6"><button class="btn-kiki-default btn-5"><span>Список <br>анимаций</span></button></a>-->
+                    <a href=".page-admin .presentation" class="local-link pull-left col-xs-6"><button class="btn-kiki-default btn-6"><span>Проиграть <br>презентацию</span></button></a>
+                </div>
+                <div class="kiki-footer">
+                    <a href=".page-admin" class="title pull-left local-link"><button class="btn-kiki-default home"><span>Главная</span></button></a>
+                    <a href=".modal-help-text-main" class="help-text pull-left"><button class="btn-kiki-default question"><span>Помощь + инструкция</span></button></a>
+                </div>
+            </div>
+
+            <div class="kiki-admin-panel page-voice">
+                <div class="kiki-header">
+                    <a href=".page-admin" class="title pull-left local-link">Голосовые команды</a>
+                    <div class="mic pull-left"></div>
+                    <a href=".page-admin" class="logo local-link pull-right"></a>
+                    
+                </div>
+                <div id="carousel-voice" class="carousel slide" data-ride="carousel" data-interval="false">
+                    <div class="carousel-inner" role="listbox"></div>
+                </div>
+
+                <div class="kiki-footer">
+                    <a class="pull-left carousel-ctrl" href="#carousel-voice" role="button" data-slide="prev">
+                        <button class="btn-kiki-default arrow-left"><span>Назад</span></button>
+                    </a>
+                    <a href=".page-admin" class="title pull-left local-link"><button class="btn-kiki-default home"><span>Главная</span></button></a>
+                    <a href=".modal-help-text-commands" class="help-text pull-left"><button class="btn-kiki-default question"><span>Помощь + инструкция</span></button></a>
+                    <a class="pull-right carousel-ctrl" href="#carousel-voice" role="button" data-slide="next">
+                        <button class="btn-kiki-default arrow-right"><span>Вперед</span></button>
+                    </a>
+                </div>
+            </div>
+
+            <!--<div class="kiki-admin-panel page-animation">-->
+                <!--<div class="kiki-header">-->
+                    <!--<a href=".page-admin" class="title pull-left local-link">Список анимаций</a>-->
+                    <!--<div class="mic pull-left"></div>-->
+                    <!--<a href=".page-admin" class="logo local-link pull-right"></a>-->
+                    <!---->
+                <!--</div>-->
+                <!--<div id="carousel-animation" class="carousel slide" data-ride="carousel" data-interval="false">-->
+                    <!--<div class="carousel-inner" role="listbox"></div>-->
+                <!--</div>-->
+
+                <!--<div class="kiki-footer">-->
+                    <!--<a class="pull-left carousel-ctrl" href="#carousel-animation" role="button" data-slide="prev">-->
+                        <!--<button class="btn-kiki-default arrow-left"><span>Назад</span></button>-->
+                    <!--</a>-->
+                    <!--<a href=".page-admin" class="title pull-left local-link"><button class="btn-kiki-default home"><span>Главная</span></button></a>-->
+                    <!--<a href="" class="pull-left"><button class="btn-kiki-default question"><span>Помощь + инструкция</span></button></a>-->
+                    <!--<a class="pull-right carousel-ctrl" href="#carousel-animation" role="button" data-slide="next">-->
+                        <!--<button class="btn-kiki-default arrow-right"><span>Вперед</span></button>-->
+                    <!--</a>-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <div class="kiki-admin-panel page-alarms">
+                <div class="kiki-header">
+                    <a href=".page-admin" class="title pull-left local-link">Локальное управление</a>
+                    <div class="mic pull-left"></div>
+                    <a href=".page-admin" class="logo local-link pull-right"></a>
+                    
+                </div>
+                <div class="kiki-alarms">
+                    <div class="kiki-alarms-inner">
+                        <div class="alarm-list pull-left">
+                            <div class="title">Будильники</div>
+                            <div class="alarm-list-content"></div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <button class="btn-kiki-success col-xs-12 add-alarm">Добавить</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="apply-alarms" id="apply_alarms">
+                                        <span></span>
+                                        Применять будильники
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="kiki-footer">
+                    <a href=".page-admin" class="title pull-left local-link"><button class="btn-kiki-default home"><span>Главная</span></button></a>
+                    <a href=".modal-help-text-alarms" class="help-text pull-left"><button class="btn-kiki-default question"><span>Помощь + инструкция</span></button></a>
+                </div>
+            </div>
+
+            <div class="kiki-admin-panel page-wifi-scan">
+                <div class="kiki-header">
+                    <a href=".page-admin" class="title pull-left local-link">Обзор беспроводных сетей</a>
+                    <div class="mic pull-left"></div>
+                    <a href=".page-admin" class="logo local-link pull-right"></a>
+                    
+                </div>
+                <div class="kiki-wifi-wrapper">
+                    <div class="kiki-wifi-list">
+                        <div id='wifi-device' class="wifi white scan">
+                            <!--<a href=".page-wifi-list" class="local-link"><button class="btn-kiki-default pull-right">Сканировать</button></a>-->
+                            <!--<div class="title pull-left">Generic MAC80 44/90ab (rdhf)</div>-->
+                            <!--<div class="attributes pull-left">Канал: <span class="chanel">36 (5.81 ГГц)</span> | Скорость: <span class="speed">52 Мбит/с</span></div>-->
+                        </div>
+                        <div id='wifi-connection' class="wifi left-padding">
+                            <!--<button id='wifi_delete_btn' class="btn-kiki-default pull-right">Удалить</button>-->
+                            <!--<button id='wifi_connection_btn' class="btn-kiki-default pull-right">Отключить</button>-->
+                            <!--<div class="signal pull-left">89%</div>-->
+                            <!--<div class="description pull-left">-->
+                                <!--SSID: <span class="ssid">ARnetWiFi5Ghz</span> | Режим: <span class="mode">Мастер</span><br>-->
+                                <!--BSSID: <span class="bssid">68:72:51</span> | Шифрование: <span class="crypt">WPA</span>-->
+                            <!--</div>-->
+                        </div>
+                        <div class="wifi">
+                            <a href=".page-wifi-connect" class="local-link wifi-back" onclick="$('.wifi-back-link').attr('href', '.page-wifi-scan');">
+                                <button id='wifi_hide_connect_btn' class="btn-kiki-default pull-left">Подключиться к скрытой сети</button>
+                            </a>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="kiki-footer">
+                    <!--<a class="pull-left carousel-ctrl" href="#carousel-wifi-scan" role="button" data-slide="prev">-->
+                        <!--<button class="btn-kiki-default arrow-left"><span>Назад</span></button>-->
+                    <!--</a>-->
+                    <a href=".page-admin" class="title pull-left local-link"><button class="btn-kiki-default home"><span>Главная</span></button></a>
+                    <a href=".modal-help-text-wifi" class="help-text pull-left"><button class="btn-kiki-default question"><span>Помощь + инструкция</span></button></a>
+                    <!--<a class="pull-right carousel-ctrl" href="#carousel-wifi-scan" role="button" data-slide="next">-->
+                        <!--<button class="btn-kiki-default arrow-right"><span>Вперед</span></button>-->
+                    <!--</a>-->
+                </div>
+            </div>
+
+            <div class="kiki-admin-panel page-wifi-list">
+                <div class="kiki-header">
+                    <a href=".page-admin" class="title pull-left local-link">Подключение к сети</a>
+                    <div class="mic pull-left"></div>
+                    <a href=".page-admin" class="logo local-link pull-right"></a>
+                    
+                </div>
+                <div id="carousel-wifi-list" class="carousel slide" data-ride="carousel" data-interval="false">
+                    <div class="carousel-inner" role="listbox"></div>
+                </div>
+
+                <div class="kiki-footer">
+                    <a class="pull-left carousel-ctrl" href="#carousel-wifi-list" role="button" data-slide="prev">
+                        <button class="btn-kiki-default arrow-left"><span>Назад</span></button>
+                    </a>
+                    <a href=".page-admin" class="title pull-left local-link"><button class="btn-kiki-default home"><span>Главная</span></button></a>
+                    <a href=".modal-help-text-wifi" class="help-text pull-left"><button class="btn-kiki-default question"><span>Помощь + инструкция</span></button></a>
+                    <a class="pull-right carousel-ctrl" href="#carousel-wifi-list" role="button" data-slide="next">
+                        <button class="btn-kiki-default arrow-right"><span>Вперед</span></button>
+                    </a>
+                </div>
+            </div>
+
+            <div class="kiki-admin-panel page-wifi-connect">
+                <div class="kiki-header">
+                    <a href=".page-admin" class="title pull-left local-link">Подключение к сети</a>
+                    <div class="mic pull-left"></div>
+                    <a href=".page-admin" class="logo local-link pull-right"></a>
+                </div>
+                <div class="kiki-wifi-wrapper">
+                    <div class="kiki-wifi-connect">
+                        <div class="row">
+                            <!--<table>-->
+                                <!--<tr>-->
+                                    <!--<td class="col-xs-4 wifi-label">-->
+                                        <!--Заменить беспроводную конфигурацию-->
+                                    <!--</td>-->
+                                    <!--<td class="col-xs-1">-->
+                                        <!--<div class="checkbox">-->
+                                            <!--<label>-->
+                                                <!--<input id='wifi_chbox' type="checkbox">-->
+                                                <!--<span></span>-->
+                                            <!--</label>-->
+                                        <!--</div>-->
+                                    <!--</td>-->
+                                    <!--<td class="col-xs-7">-->
+                                        <!--<span class="wifi-question"><i class="fa fa-question"></i> Если вы не выберете эту опцию, то <br>будет создана дополнительная сеть </span>-->
+                                    <!--</td>-->
+                                <!--</tr>-->
+                            <!--</table>-->
+                        </div>
+                        <div class="row">
+                            <table>
+                                <tr>
+                                    <td class="col-xs-4 wifi-label">
+                                        ESSID
+                                    </td>
+                                    <td class="col-xs-8">
+                                        <input id='ESSID' type="text" class="col-xs-6"><br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-xs-4"></td>
+                                    <td class="col-xs-8">
+                                        <span class="wifi-question"><i class="fa fa-question"></i> Укажите закрытый ключ</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <table>
+                                <tr>
+                                    <td class="col-xs-4 wifi-label">
+                                        Пароль WPA
+                                    </td>
+                                    <td class="col-xs-8">
+                                        <input id='WPA_password' type="password" class="col-xs-6"><br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-xs-4"></td>
+                                    <td class="col-xs-8">
+                                        <span class="wifi-question"><i class="fa fa-question"></i> Допустимые символы: A-Z, a-z, 0-9 и _</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-4">
+                            </div>
+                            <div class="col-xs-8">
+                                <button class="btn-kiki-success">Ок</button>
+                                <a href=".page-wifi-list" class="local-link wifi-back-link">
+                                    <button class="btn-kiki-danger">Отмена</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="kiki-footer">
+                    <!--<a class="pull-left carousel-ctrl" href="#carousel-wifi-scan" role="button" data-slide="prev">-->
+                    <!--<button class="btn-kiki-default arrow-left"><span>Назад</span></button>-->
+                    <!--</a>-->
+                    <a href=".page-admin" class="title pull-left local-link"><button class="btn-kiki-default home"><span>Главная</span></button></a>
+                    <a href=".modal-help-text-wifi" class="help-text pull-left"><button class="btn-kiki-default question"><span>Помощь + инструкция</span></button></a>
+                    <!--<a class="pull-right carousel-ctrl" href="#carousel-wifi-scan" role="button" data-slide="next">-->
+                    <!--<button class="btn-kiki-default arrow-right"><span>Вперед</span></button>-->
+                    <!--</a>-->
+                </div>
+            </div>
+        </div>
+        <div class="modal-shadow modal-login">
+            <div class="modal-window">
+                <div class="modal-title">
+                    <div class="modal-close pull-right"><i class="fa fa-times" aria-hidden="true"></i></div>
+                    <span><i class="fa fa-key" aria-hidden="true"></i> Вход в кабинет админа</span>
+                </div>
+                <div class="modal-body">
+                    <input type="text" name="login" class="login" placeholder="Логин">
+                    <input type="password" name="password" class="password" placeholder="Пароль">
+                    <button class="btn btn-success modal-confirm">Войти</button>
+                </div>
+            </div>
+        </div>
+        <div class="modal-shadow modal-wifi-error">
+            <div class="modal-window">
+                <div class="modal-title">
+                    <div class="modal-close pull-right"><i class="fa fa-times" aria-hidden="true"></i></div>
+                    <span><i class="fa fa-key" aria-hidden="true"></i>Ошибка выполнения запроса</span>
+                </div>
+                <div class="modal-body">
+                    <button class="btn btn-success modal-confirm">Ок</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

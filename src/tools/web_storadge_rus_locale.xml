@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?> <messages>
+    <message id="Title">Мульти медия хранилище</message>
+    <message id="Delete">Удалить</message>
+    <message id="Send">Отправить</message>
+    <message id="ConfirmDelete">Продолжить удаление?</message>
+    <message id="Ok">Продолжить</message>
+    <message id="Cancel">Отменить</message>
+</messages>

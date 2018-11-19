@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Video framer</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="css/main.css">
+		<link async="" href="http://fonts.googleapis.com/css?family=Abel" data-generated="http://enjoycss.com" rel="stylesheet" type="text/css">
+		<script src="js/socket.io.js"></script>
+		<script src="js/check_devices.js"></script>
+		<script src="js/signaling_socket.js"></script>
+		<script src="js/user_media.js"></script>
+		<script src="js/robot_framer.js"></script>
+		<script src="js/operator_framer.js"></script>
+	</head>
+	<body>
+		<div class="item">
+			<!--<div class="item">-->
+				<!--<span> Top Video </span>-->
+				<!--<video id="video_top" width="320" height="240" autoplay="autoplay"></video>-->
+			<!--</div>-->
+			<div class="item" style="height: 270px; margin-bottom:10px;text-align:center;vertical-align:middle">
+				<span> Top Canvas </span>
+				<canvas id="canvas_top_0" width="640" height="480" ></canvas>
+			</div>
+			<div class="item" style="height: 270px; margin-bottom:10px;text-align:center;vertical-align:middle">
+				<span> Top Canvas </span>
+				<canvas id="canvas_top_1" width="640" height="480" ></canvas>
+			</div>
+		</div>
+		<div class="item">
+			<!--<div class="item">-->
+				<!--<span> Bottom Video </span>-->
+				<!--<video id="video_bottom" width="320" height="240" autoplay="autoplay"></video>-->
+			<!--</div>-->
+			<div class="item" style="height: 270px; margin-bottom:10px;text-align:center;vertical-align:middle">
+				<span> Bottom Canvas </span>
+				<canvas id="canvas_bottom_0" width="640" height="480" ></canvas>
+			</div>
+			<div class="item" style="height: 270px; margin-bottom:10px;text-align:center;vertical-align:middle">
+				<span> Bottom Canvas </span>
+				<canvas id="canvas_bottom_1" width="640" height="480" ></canvas>
+			</div>
+		</div>
+		<script src="js/main.js"></script>
+    </body>
+</html>

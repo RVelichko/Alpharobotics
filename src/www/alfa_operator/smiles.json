@@ -1,0 +1,34 @@
+[
+    {
+        "cmd": "/cmd 08",
+        "cmd_smile": "smiles/smile01.png"
+    },
+    {
+        "cmd": "/cmd 09",
+        "cmd_smile": "smiles/smile02.png"
+    },
+    {
+        "cmd": "/cmd 10",
+        "cmd_smile": "smiles/smile03.png"
+    },
+    {
+        "cmd": "/cmd 11",
+        "cmd_smile": "smiles/smile04.png"
+    },
+    {
+        "cmd": "/cmd 12",
+        "cmd_smile": "smiles/smile05.png"
+    },
+    {
+        "cmd": "/cmd 13",
+        "cmd_smile": "smiles/smile06.png"
+    },
+    {
+        "cmd": "/cmd 14",
+        "cmd_smile": "smiles/smile07.png"
+    },
+    {
+        "cmd": "/cmd 15",
+        "cmd_smile": "smiles/smile08.png"
+    }
+]

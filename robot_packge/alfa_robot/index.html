@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+        <title>Administrator</title>
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta http-equiv="Pragma" content="no-cache" />
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <link rel='stylesheet' href='css/font-roboto.css' type='text/css'>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="js/fancybox/jquery.fancybox.css">
+        <link rel="stylesheet" href="css/new-style.css">
+        <link rel="stylesheet" href="css/kiki-style.css">
+        <script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/fancybox/jquery.fancybox.js"></script>
+        <script type="text/javascript" src="js/utils.js"></script>
+        <script type="text/javascript" src="js/room_service.js"></script>
+        <script type="text/javascript" src="js/wifi.js"></script>
+        <script type="text/javascript" src="js/alarms.js"></script>
+        <script type="text/javascript" src="js/kiki.js"></script>
+        <script type="text/javascript" src="js/socket.io.js"></script>
+    </head>
+    <body id="fullscreen">
+        <iframe id="iframe_automat" hidden></iframe>
+
+        <div class="kiki-admin-panel-wrapper">
+            <div class="kiki-admin-panel page-media">
+                <div class="pictures"></div>
+            </div>
+            <div class="kiki-admin-panel page-admin">
+                <div class="presentation">
+                    <div id="presentation-iframe" class="fancybox-iframe">
+                        <video width="100%" height="100%" autoplay="" loop="" name="media">
+                            <source src="1.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="close" onClick="$(this).parent().hide(); $(this).parent().find('iframe').attr('src', '');"><i class="fa fa-times"></i></div>
+                </div>
+                <div class="kiki-header">
+                    <a href=".page-admin" class="title pull-left local-link">Robot KIKI</a>
+                    <div class="mic pull-left"></div>
+                    <a href=".page-admin" class="logo local-link pull-right"></a>
+                </div>
+                <div class="kiki-buttons">
+                    <a href=".page-wifi-scan" class="local-link pull-left col-xs-4"><button class="btn-kiki-default btn-1"><span>Connect <br>to Wi-Fi</span></button></a>
+                    <a href=".page-alarms" class="local-link pull-left col-xs-4"><button class="btn-kiki-default btn-3"><span>Local <br>control</span></button></a>
+                    <a href=".page-voice" class="local-link pull-left col-xs-4"><button class="btn-kiki-default btn-4"><span>Presets <br>player</span></button></a>
+                    <a href=".page-media" class="local-link pull-left col-xs-6"><button class="btn-kiki-default btn-2"><span>Multimedia <br>viewer</span></button></a>
+                    <a href=".page-admin .presentation" class="local-link pull-left col-xs-6"><button class="btn-kiki-default btn-6"><span>Play <br>presentation</span></button></a>
+                </div>
+                <div class="kiki-footer">
+                    <a href=".page-admin" class="title pull-left local-link"><button class="btn-kiki-default home"><span>Home</span></button></a>
+                    <!--<a href=".modal-help-text-main" class="help-text pull-left"><button class="btn-kiki-default question"><span>Help + instructions</span></button></a>-->
+                </div>
+            </div>
+
+            <div class="kiki-admin-panel page-voice">
+                <div class="kiki-header">
+                    <a href=".page-admin" class="title pull-left local-link">Presets player</a>
+                    <div class="mic pull-left"></div>
+                    <a href=".page-admin" class="logo local-link pull-right"></a>
+                    
+                </div>
+                <div id="carousel-voice" class="carousel slide" data-ride="carousel" data-interval="false">
+                    <div class="carousel-inner" role="listbox"></div>
+                </div>
+
+                <div class="kiki-footer">
+                    <a class="pull-left carousel-ctrl" href="#carousel-voice" role="button" data-slide="prev">
+                        <button class="btn-kiki-default arrow-left"><span>Back</span></button>
+                    </a>
+                    <a href=".page-admin" class="title pull-left local-link"><button class="btn-kiki-default home"><span>Home</span></button></a>
+                    <!--<a href=".modal-help-text-commands" class="help-text pull-left"><button class="btn-kiki-default question"><span>Help + instructions</span></button></a>-->
+                    <a class="pull-right carousel-ctrl" href="#carousel-voice" role="button" data-slide="next">
+                        <button class="btn-kiki-default arrow-right"><span>Forward</span></button>
+                    </a>
+                </div>
+            </div>
+
+            <div class="kiki-admin-panel page-alarms">
+                <div class="kiki-header">
+                    <a href=".page-admin" class="title pull-left local-link">Local control</a>
+                    <div class="mic pull-left"></div>
+                    <a href=".page-admin" class="logo local-link pull-right"></a>
+                    
+                </div>
+                <div class="kiki-alarms">
+                    <div class="kiki-alarms-inner">
+                        <div class="alarm-list pull-left">
+                            <div class="title">Answer timer</div>
+                            <div class="alarm-list-content"></div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <button class="btn-kiki-success col-xs-12 add-alarm">Add answer timer</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="row">-->
+                            <!--<div class="col-xs-12">-->
+                                <!--<div class="checkbox">-->
+                                    <!--<label>-->
+                                        <!--<input type="checkbox" name="apply-alarms" id="apply_alarms">-->
+                                        <!--<span></span>-->
+                                        <!--Change Answer timer-->
+                                    <!--</label>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+                <div class="kiki-footer">
+                    <a href=".page-admin" class="title pull-left local-link"><button class="btn-kiki-default home"><span>Home</span></button></a>
+                    <!--<a href=".modal-help-text-alarms" class="help-text pull-left"><button class="btn-kiki-default question"><span>Help + instructions</span></button></a>-->
+                </div>
+            </div>
+
+            <div class="kiki-admin-panel page-wifi-scan">
+                <div class="kiki-header">
+                    <a href=".page-admin" class="title pull-left local-link">Overview of Wireless Networks</a>
+                    <div class="mic pull-left"></div>
+                    <a href=".page-admin" class="logo local-link pull-right"></a>
+                    
+                </div>
+                <div class="kiki-wifi-wrapper">
+                    <div class="kiki-wifi-list">
+                        <div id='wifi-device' class="wifi white scan">
+                        </div>
+                        <div id='wifi-connection' class="wifi left-padding">
+                        </div>
+                        <div class="wifi">
+                            <a href=".page-wifi-connect" class="local-link wifi-back" onclick="$('.wifi-back-link').attr('href', '.page-wifi-scan');">
+                                <button id='wifi_hide_connect_btn' class="btn-kiki-default pull-left">Connect to a hidden network</button>
+                            </a>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="kiki-footer">
+                    <a href=".page-admin" class="title pull-left local-link"><button class="btn-kiki-default home"><span>Home</span></button></a>
+                    <!--<a href=".modal-help-text-wifi" class="help-text pull-left"><button class="btn-kiki-default question"><span>Help + instructions</span></button></a>-->
+                </div>
+            </div>
+
+            <div class="kiki-admin-panel page-wifi-list">
+                <div class="kiki-header">
+                    <a href=".page-admin" class="title pull-left local-link">Connecting to a network</a>
+                    <div class="mic pull-left"></div>
+                    <a href=".page-admin" class="logo local-link pull-right"></a>
+                    
+                </div>
+                <div id="carousel-wifi-list" class="carousel slide" data-ride="carousel" data-interval="false">
+                    <div class="carousel-inner" role="listbox"></div>
+                </div>
+
+                <div class="kiki-footer">
+                    <a class="pull-left carousel-ctrl" href="#carousel-wifi-list" role="button" data-slide="prev">
+                        <button class="btn-kiki-default arrow-left"><span>Back</span></button>
+                    </a>
+                    <a href=".page-admin" class="title pull-left local-link"><button class="btn-kiki-default home"><span>Home</span></button></a>
+                    <!--<a href=".modal-help-text-wifi" class="help-text pull-left"><button class="btn-kiki-default question"><span>Help + instructions</span></button></a>-->
+                    <a class="pull-right carousel-ctrl" href="#carousel-wifi-list" role="button" data-slide="next">
+                        <button class="btn-kiki-default arrow-right"><span>Forward</span></button>
+                    </a>
+                </div>
+            </div>
+
+            <div class="kiki-admin-panel page-wifi-connect">
+                <div class="kiki-header">
+                    <a href=".page-admin" class="title pull-left local-link">Connection to a network</a>
+                    <div class="mic pull-left"></div>
+                    <a href=".page-admin" class="logo local-link pull-right"></a>
+                </div>
+                <div class="kiki-wifi-wrapper">
+                    <div class="kiki-wifi-connect">
+                        <div class="row">
+                        </div>
+                        <div class="row">
+                            <table>
+                                <tr>
+                                    <td class="col-xs-4 wifi-label">
+                                        ESSID
+                                    </td>
+                                    <td class="col-xs-8">
+                                        <input id='ESSID' type="text" class="col-xs-6"><br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-xs-4"></td>
+                                    <td class="col-xs-8">
+                                        <span class="wifi-question"><i class="fa fa-question"></i> Specify the private key</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <table>
+                                <tr>
+                                    <td class="col-xs-4 wifi-label">
+                                        Password WPA
+                                    </td>
+                                    <td class="col-xs-8">
+                                        <input id='WPA_password' type="password" class="col-xs-6"><br>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-xs-4"></td>
+                                    <td class="col-xs-8">
+                                        <span class="wifi-question"><i class="fa fa-question"></i> Available characters: 'A-Z, a-z, 0-9' and '_'</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-4">
+                            </div>
+                            <div class="col-xs-8">
+                                <button class="btn-kiki-success">Ок</button>
+                                <a href=".page-wifi-list" class="local-link wifi-back-link">
+                                    <button class="btn-kiki-danger">Cancel</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="kiki-footer">
+                    <a href=".page-admin" class="title pull-left local-link"><button class="btn-kiki-default home"><span>Home</span></button></a>
+                    <!--<a href=".modal-help-text-wifi" class="help-text pull-left"><button class="btn-kiki-default question"><span>Help + instructions</span></button></a>-->
+                </div>
+            </div>
+        </div>
+        <div class="modal-shadow modal-login">
+            <div class="modal-window">
+                <div class="modal-title">
+                    <div class="modal-close pull-right"><i class="fa fa-times" aria-hidden="true"></i></div>
+                    <span><i class="fa fa-key" aria-hidden="true"></i> Login to the main page</span>
+                </div>
+                <div class="modal-body">
+                    <input type="text" name="login" class="login" placeholder="Login">
+                    <input type="password" name="password" class="password" placeholder="Password">
+                    <button class="btn btn-success modal-confirm">Quit</button>
+                </div>
+            </div>
+        </div>
+        <div class="modal-shadow modal-wifi-error">
+            <div class="modal-window">
+                <div class="modal-title">
+                    <div class="modal-close pull-right"><i class="fa fa-times" aria-hidden="true"></i></div>
+                    <span><i class="fa fa-key" aria-hidden="true"></i>Error performing request</span>
+                </div>
+                <div class="modal-body">
+                    <button class="btn btn-success modal-confirm">Ок</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

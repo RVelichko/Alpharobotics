@@ -1,0 +1,19 @@
+set(APP_WS_TRANSLATOR wsock-translator-server)
+add_executable(${APP_WS_TRANSLATOR}
+    BaseWorker.cpp
+    ClientTranslatorWorker.cpp
+    OperatorTranslatorWorker.cpp
+    main.cpp
+    )
+target_link_libraries(${APP_WS_TRANSLATOR}
+    log
+    websocketserver
+    pthread
+    ssl
+    crypto
+    ${JSONCPP_STATIC_LIBRARIES}
+    ${Boost_PROGRAM_OPTIONS_LIBRARY}
+    ${Boost_REGEX_LIBRARY}
+    ${Boost_SYSTEM_LIBRARY}
+    ${CMAKE_THREAD_LIBS_INIT}
+    )

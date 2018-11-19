@@ -1,0 +1,8 @@
+{
+  "operator_name":"test-operator-001",
+  "send_room_id":"test-room-001",
+  "rooms_server_url":"ws://localhost:8087/rest/operator",
+  "send_url":"https://cloud.alexrobotics.ru:48828",
+  "save_url":"http://185.58.205.67:8082/rest/presets?file=presets_editor/presets.json",
+  "presets_url":"http://185.58.205.67/presets_editor/presets.json"
+}

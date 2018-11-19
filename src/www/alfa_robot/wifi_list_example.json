@@ -1,0 +1,17 @@
+[
+  {
+    "device":"radio0",
+    "join":"ARnetWiFi5GHz",
+    "mode":"Master",
+    "bssid":"00:27:22:70:F6:2E",
+    "channel":"36",
+    "wep":"0",
+    "wpa_version":"2",
+    "wpa_suites":"PSK",
+    "wpa_group":"CCMP",
+    "wpa_pairwise":"CCMP",
+    "clbridge":"0",
+    "encryption":"WPA2 - PSK",
+    "quality":"88%"
+  }
+]

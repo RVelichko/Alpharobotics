@@ -1,0 +1,6 @@
+{
+  "robot_name":"test-002",
+  "save_url":"http://185.58.205.67:8082/rest/presets?file=stt_editor/robot_stt_config.json",
+  "robot_config_url":"http://185.58.205.67/stt_editor/robot_stt_config.json",
+  "media_url":"http://185.58.205.67/media"
+}

@@ -1,0 +1,6 @@
+{
+  "name":"Тестовая плата",
+  "send_url":"http://10.0.0.7/rest/play",
+  "save_url":"http://185.58.205.67:8082/rest/presets?file=presets_editor/presets.json",
+  "presets_url":"http://localhost:63342/presets_editor/presets.json"
+}

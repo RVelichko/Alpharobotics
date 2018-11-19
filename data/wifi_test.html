@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ru">
+ <head>
+  <meta charset="utf-8">
+  <title>Kiki00003ow - LuCI</title>
+  <!--[if lt IE 9]><script src="/luci-static/bootstrap/html5.js"></script><![endif]-->
+  <meta name="viewport" content="initial-scale=1.0">
+  <link rel="stylesheet" href="/luci-static/bootstrap/cascade.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 854px)" href="/luci-static/bootstrap/mobile.css" type="text/css" />
+  <link rel="shortcut icon" href="/luci-static/bootstrap/favicon.ico">
+  <script src="/luci-static/resources/xhr.js"></script>
+ </head>
+
+ <body class="lang_ru">
+  <header>
+   <div class="fill">
+    <div class="container">
+     <a class="brand" href="#">Kiki00003ow</a>
+     <ul class="nav">
+        <li class="dropdown">
+            <a class="menu" href="#">Статус</a>
+         <ul class="dropdown-menu">
+          <li><a href="/cgi-bin/luci/;stok=a3c48290fdfa96376f01bb29ba812ddd/admin/status/overview">Обзор</a></li>
+          <li><a href="/cgi-bin/luci/;stok=a3c48290fdfa96376f01bb29ba812ddd/admin/status/iptables">Межсетевой экран</a></li>
+          <li><a href="/cgi-bin/luci/;stok=a3c48290fdfa96376f01bb29ba812ddd/admin/status/routes">Маршруты</a></li>
+          <li><a href="/cgi-bin/luci/;stok=a3c48290fdfa96376f01bb29ba812ddd/admin/status/syslog">Системный журнал</a></li>
+          <li><a href="/cgi-bin/luci/;stok=a3c48290fdfa96376f01bb29ba812ddd/admin/status/dmesg">Журнал ядра</a></li>
+          <li><a href="/cgi-bin/luci/;stok=a3c48290fdfa96376f01bb29ba812ddd/admin/status/processes">Процессы</a></li>
+          <li><a href="/cgi-bin/luci/;stok=a3c48290fdfa96376f01bb29ba812ddd/admin/status/realtime">Графики в реальном времени</a></li>
+        </ul>
+        </li>
+
+        <li class="dropdown">
+            <a class="menu" href="#">Система</a>
+         <ul class="dropdown-menu">
+          <li><a href="/cgi-bin/luci/;stok=a3c48290fdfa96376f01bb29ba812ddd/admin/system/system">Система</a></li>
+          <li><a href="/cgi-bin/luci/;stok=a3c48290fdfa96376f01bb29ba812ddd/admin/system/admin">Управление</a></li>
+          <li><a href="/cgi-bin/luci/;stok=a3c48290fdfa96376f01bb29ba812ddd/admin/system/packages">Программное обеспечение</a></li>
+          <li><a href="/cgi-bin/luci/;stok=a3c48290fdfa96376f01bb29ba812ddd/admin/system/startup">Загрузка</a></li>
+          <li><a href="/cgi-bin/luci/;stok=a3c48290fdfa96376f01bb29ba812ddd/admin/system/crontab">Запланированные задания</a></li>
+          <li><a href="/cgi-bin/luci/;stok=a3c48290fdfa96376f01bb29ba812ddd/admin/system/leds">Настройка LED </a></li>
+          <li><a href="/cgi-bin/luci/;stok=a3c48290fdfa96376f01bb29ba812ddd/admin/system/flashops">Резервная копия / прошивка</a></li>
+          <li><a href="/cgi-bin/luci/;stok=a3c48290fdfa96376f01bb29ba812ddd/admin/system/reboot">Перезагрузка</a></li>
+        </ul>
+        </li>
+
+        <li class="dropdown">
+            <a class="menu" href="#">Сеть</a>
+         <ul class="dropdown-menu">
+          <li><a href="/cgi-bin/luci/;stok=a3c48290fdfa96376f01bb29ba812ddd/admin/network/network">Интерфейсы</a></li>
+          <li><a href="/cgi-bin/luci/;stok=a3c48290fdfa96376f01bb29ba812ddd/admin/network/wireless">Wi-Fi</a></li>
+          <li><a href="/cgi-bin/luci/;stok=a3c48290fdfa96376f01bb29ba812ddd/admin/network/dhcp">DHCP и DNS</a></li>
+          <li><a href="/cgi-bin/luci/;stok=a3c48290fdfa96376f01bb29ba812ddd/admin/network/hosts">Имена хостов</a></li>
+          <li><a href="/cgi-bin/luci/;stok=a3c48290fdfa96376f01bb29ba812ddd/admin/network/routes">Статические маршруты</a></li>
+          <li><a href="/cgi-bin/luci/;stok=a3c48290fdfa96376f01bb29ba812ddd/admin/network/firewall">Межсетевой экран</a></li>
+          <li><a href="/cgi-bin/luci/;stok=a3c48290fdfa96376f01bb29ba812ddd/admin/network/diagnostics">Диагностика</a></li>
+        </ul>
+        </li>
+
+         <li>
+                <a href="/cgi-bin/luci/;stok=a3c48290fdfa96376f01bb29ba812ddd/admin/logout">Выйти</a>
+        </li>
+
+        </ul>
+
+
+        <div class="pull-right">
+
+      <span id="xhr_poll_status" style="display:none" onclick="XHR.running() ? XHR.halt() : XHR.run()">
+       <span class="label success" id="xhr_poll_status_on">Автообновление включено</span>
+       <span class="label" id="xhr_poll_status_off" style="display:none">Автообновление выключено</span>
+      </span>
+     </div>
+
+    </div>
+   </div>
+  </header><div id="maincontent" class="container">
+
+
+
+
+<h2><a id="content" name="content">Подключение к сети: сканирование</a></h2>
+
+<div class="cbi-map">
+        <fieldset class="cbi-section">
+                <table class="cbi-section-table" style="empty-cells:hide">
+                        <!-- scan list -->
+
+                        <tr class="cbi-section-table-row cbi-rowstyle-1">
+                                <td class="cbi-value-field" style="width:16px; padding:3px">
+                                        <abbr title="Сигнал: -45 дБ / Качество: 65/70">
+                                                <img src="/luci-static/resources/icons/signal-75-100.png" /><br />
+                                                <small>92%</small>
+                                        </abbr>
+                                </td>
+                                <td class="cbi-value-field" style="vertical-align:middle; text-align:left; padding:3px">
+                                        <big><strong>ARnetWiFi5GHz</strong></big><br />
+                                        <strong>Channel:</strong> 36 |
+                                        <strong>Mode:</strong> Master |
+                                        <strong>BSSID:</strong> 00:27:22:70:F6:2E |
+                                        <strong>Encryption:</strong> <abbr title='Парный: CCMP / Групповой: CCMP'>WPA2 - PSK</abbr>
+                                </td>
+                                <td class="cbi-value-field" style="width:40px">
+                                        <form action="/cgi-bin/luci/;stok=a3c48290fdfa96376f01bb29ba812ddd/admin/network/wireless_join/radio0.network1" method="post">
+                                                <input type="hidden" name="device" value="radio0" />
+                                                <input type="hidden" name="join" value="ARnetWiFi5GHz" />
+                                                <input type="hidden" name="mode" value="Master" />
+                                                <input type="hidden" name="bssid" value="00:27:22:70:F6:2E" />
+                                                <input type="hidden" name="channel" value="36" />
+                                                <input type="hidden" name="wep" value="0" />
+
+                                                <input type="hidden" name="wpa_version" value="2" />
+                                                <input type="hidden" name="wpa_suites" value="PSK" />
+                                                <input type="hidden" name="wpa_group" value="CCMP" />
+                                                <input type="hidden" name="wpa_pairwise" value="CCMP" />
+
+
+                                                <input type="hidden" name="clbridge" value="0" />
+
+                                                <input class="cbi-button cbi-button-apply" type="submit" value="Подключение к сети" />
+                                        </form>
+                                </td>
+                        </tr>
+
+                        <tr class="cbi-section-table-row cbi-rowstyle-2">
+                                <td class="cbi-value-field" style="width:16px; padding:3px">
+                                        <abbr title="Сигнал: -36 дБ / Качество: 70/70">
+                                                <img src="/luci-static/resources/icons/signal-75-100.png" /><br />
+                                                <small>100%</small>
+                                        </abbr>
+                                </td>
+                                <td class="cbi-value-field" style="vertical-align:middle; text-align:left; padding:3px">
+                                        <big><strong>ARnetWiFi5GHz</strong></big><br />
+                                        <strong>Channel:</strong> 44 |
+                                        <strong>Mode:</strong> Master |
+                                        <strong>BSSID:</strong> F0:79:59:E6:CE:84 |
+                                        <strong>Encryption:</strong> <abbr title='Парный: CCMP / Групповой: CCMP'>WPA2 - PSK</abbr>
+                                </td>
+                                <td class="cbi-value-field" style="width:40px">
+                                        <form action="/cgi-bin/luci/;stok=a3c48290fdfa96376f01bb29ba812ddd/admin/network/wireless_join/radio0.network1" method="post">
+                                                <input type="hidden" name="device" value="radio0" />
+                                                <input type="hidden" name="join" value="ARnetWiFi5GHz" />
+                                                <input type="hidden" name="mode" value="Master" />
+                                                <input type="hidden" name="bssid" value="F0:79:59:E6:CE:84" />
+                                                <input type="hidden" name="channel" value="44" />
+                                                <input type="hidden" name="wep" value="0" />
+
+                                                <input type="hidden" name="wpa_version" value="2" />
+                                                <input type="hidden" name="wpa_suites" value="PSK" />
+                                                <input type="hidden" name="wpa_group" value="CCMP" />
+                                                <input type="hidden" name="wpa_pairwise" value="CCMP" />
+
+
+                                                <input type="hidden" name="clbridge" value="0" />
+
+                                                <input class="cbi-button cbi-button-apply" type="submit" value="Подключение к сети" />
+                                        </form>
+                                </td>
+                        </tr>
+
+                        <!-- /scan list -->
+                </table>
+        </fieldset>
+</div>
+<div class="cbi-page-actions right">
+        <form class="inline" action="/cgi-bin/luci/;stok=a3c48290fdfa96376f01bb29ba812ddd/admin/network/wireless" method="get">
+                <input class="cbi-button cbi-button-reset" type="submit" value="Назад к обзору" />
+        </form>
+        <form class="inline" action="/cgi-bin/luci/;stok=a3c48290fdfa96376f01bb29ba812ddd/admin/network/wireless_join/radio0.network1" method="get">
+                <input type="hidden" name="device" value="radio0" />
+                <input class="cbi-button cbi-input-find" type="submit" value="Повторить сканирование" />
+        </form>
+</div>
+
+
+   <footer>
+    <a href="http://luci.subsignal.org/">Powered by LuCI 15.05-149-g0d8bbd2 Release (git-15.363.78009-956be55)</a> / OpenWrt Chaos Calmer 15.05.1
+
+   </footer>
+   </div>
+  </div>
+ </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+		<title>Command Editor</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<link rel="stylesheet" href="bootstrap.min.css">
+		<link rel="stylesheet" href="bootstrap-theme.min.css">
+		<link rel="stylesheet" href="style.css">
+		<script src="utils.js"></script>
+	</head>
+	<body>
+		<script src="socket.io.js"></script>
+
+		<iframe id="ifr_driver" src="https://cloud.alexrobotics.ru:48828/test-001/operator" align="center" frameborder="0" marginheight="0" marginwidth="0"></iframe>
+
+		<div id="operator" class="row border">
+			<div id="input_pannel" class="row border">
+				<din id="preset_name_pannel" class="row border">
+					<input id="preset_name" type="text" placeholder="название пресета" name="comsequence" readonly>
+				</din>
+				<div id="input_text" class="row">
+					<input id="send_text" type="text" placeholder="сообщение" name="comsequence">
+					<div id="insert_smile"></div>
+					<button id="save_text_btn" class="btn btn-warning btn-sm">
+						<div id="send_img"></div> Отправить
+					</button>
+				</div>
+			</div>
+
+			<div id="buttons_log" class="row">
+				<div id="buttons_pannel">
+					<div id="smiles_pannel" class="row border">
+						<div id="selected_smile"></div>
+						<div id="smiles"></div>
+					</div>
+					<div id="presets" class="row border"></div>
+				</div>
+
+				<div id="log_pannel" class="border"></div>
+			</div>
+		</div>
+
+		<div id="help" hidden></div>
+
+		<script src="main.js"></script>
+	</body>
+</html>

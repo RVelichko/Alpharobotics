@@ -1,0 +1,4 @@
+{
+  "operator_server_url":"ws://185.58.205.67:8083/operator_side",
+  "operator_name":"operator-test-001"
+}
